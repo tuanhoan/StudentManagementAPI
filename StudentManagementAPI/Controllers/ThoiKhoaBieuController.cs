@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using StudentManagementAPI.Models;
@@ -11,6 +12,7 @@ namespace StudentManagementAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class ThoiKhoaBieuController : ControllerBase
     {
         private readonly MapTeacherSubjectTeamServices _teacherSubjectTeamServices;
