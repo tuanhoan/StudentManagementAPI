@@ -7,21 +7,19 @@ namespace StudentManagementAPI.Services
 {
     public class TeamServices
     {
-        readonly IDbContextFactory<StudentManagementContext> _contextFactory;
-        public TeamServices(IDbContextFactory<StudentManagementContext> context)
+        readonly StudentManagementContext _context;
+        public TeamServices(StudentManagementContext context)
         {
-            _contextFactory = context;
+            _context = context;
         }
         public async Task AddRangeAsync(List<Teams> teams)
         {
-            using var context = _contextFactory.CreateDbContext();
-             context.Teams.AddRange(teams);
-            await context.SaveChangesAsync();
+            _context.Teams.AddRange(teams);
+            await _context.SaveChangesAsync();
         }
         public async Task<List<Teams>> GetAllAsync()
-        {
-            using var context = _contextFactory.CreateDbContext();
-            return await context.Teams.ToListAsync();
+        { 
+            return await _context.Teams.ToListAsync();
         }
     }
 }

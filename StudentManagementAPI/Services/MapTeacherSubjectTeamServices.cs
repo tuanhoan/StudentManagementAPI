@@ -11,21 +11,19 @@ namespace StudentManagementAPI.Services
 {
     public class MapTeacherSubjectTeamServices
     {
-        readonly IDbContextFactory<StudentManagementContext> _contextFactory;
-        public MapTeacherSubjectTeamServices(IDbContextFactory<StudentManagementContext> context)
+        readonly StudentManagementContext _context;
+        public MapTeacherSubjectTeamServices(StudentManagementContext context)
         {
-            _contextFactory = context;
+            _context = context;
         }
         public async Task AddRangeAsync(List<MapTeacherSubjectTeam> mapTeacherSubjectTeams)
         {
-            using var context = _contextFactory.CreateDbContext();
-            context.MapTeacherSubjectTeams.AddRange(mapTeacherSubjectTeams);
-            await context.SaveChangesAsync();
+            _context.MapTeacherSubjectTeams.AddRange(mapTeacherSubjectTeams);
+            await _context.SaveChangesAsync();
         }
         public async Task<List<MapTeacherSubjectTeam>> GetAllAsync()
         {
-            using var context = _contextFactory.CreateDbContext(); 
-            return await context.MapTeacherSubjectTeams
+            return await _context.MapTeacherSubjectTeams
                 .Include(x => x.TeacherNavigation)
                 .Include(x => x.TeamNavigation)
                 .Include(x => x.SubjectNavigation) 
@@ -113,9 +111,8 @@ namespace StudentManagementAPI.Services
             return kq;
         }
         public async Task<List<MapTeacherSubjectTeam>> GetByTeacherId(int Id)
-        {
-            using var context = _contextFactory.CreateDbContext();
-            return await context.MapTeacherSubjectTeams
+        { 
+            return await _context.MapTeacherSubjectTeams
                 .Where(x=>x.TeacherId == Id)
                 .Include(x => x.TeacherNavigation)
                 .Include(x => x.TeamNavigation)

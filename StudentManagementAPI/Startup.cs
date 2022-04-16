@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +13,8 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using StudentManagementAPI.Models;
 using StudentManagementAPI.Services;
+//using StudentManagementAPI.Services;
+//using StudentManagementAPI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +40,7 @@ namespace StudentManagementAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "StudentManagementAPI", Version = "v1" });
-            });
+            }); 
 
             services.AddCors(options =>
             {
@@ -47,14 +50,24 @@ namespace StudentManagementAPI
                                         .AllowAnyMethod());
             });
 
-            services.AddDbContextFactory<StudentManagementContext>(options =>
-               options.UseSqlServer(@"Data Source=.;Initial Catalog=ThoiKhoaBieu;Integrated Security=True", o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
-           );
+            services.AddDbContext<StudentManagementContext>(options => {
+                string connectstring = Configuration.GetConnectionString("DefaultConnection");
+                options.UseSqlServer(connectstring);
+            });
 
-            services.AddScoped<TeamServices>();
-            services.AddScoped<SubjectServices>();
-            services.AddScoped<TeacherServices>();
-            services.AddScoped<MapTeacherSubjectTeamServices>();
+            services.AddIdentity<AppUser, AppRole>()
+    .AddEntityFrameworkStores<StudentManagementContext>()
+    .AddDefaultTokenProviders();
+
+            services.AddTransient<TeamServices>();
+            services.AddTransient<SubjectServices>();
+            services.AddTransient<TeacherServices>();
+            services.AddTransient<MapTeacherSubjectTeamServices>();
+
+            //services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
+            //services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
+            //services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<UserServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

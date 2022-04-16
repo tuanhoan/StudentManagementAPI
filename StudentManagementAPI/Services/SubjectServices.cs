@@ -7,21 +7,19 @@ namespace StudentManagementAPI.Services
 {
     public class SubjectServices
     {
-        readonly IDbContextFactory<StudentManagementContext> _contextFactory;
-        public SubjectServices(IDbContextFactory<StudentManagementContext> context)
+        readonly StudentManagementContext _context;
+        public SubjectServices(StudentManagementContext context)
         {
-            _contextFactory = context;
+            _context = context;
         }
         public async Task AddRangeAsync(List<Subjects> subjects)
         {
-            using var context = _contextFactory.CreateDbContext();
-            context.Subjects.AddRange(subjects);
-            await context.SaveChangesAsync();
+            _context.Subjects.AddRange(subjects);
+            await _context.SaveChangesAsync();
         }
         public async Task<List<Subjects>> GetAllAsync()
-        {
-            using var context = _contextFactory.CreateDbContext();
-            return await context.Subjects.ToListAsync();
+        { 
+            return await _context.Subjects.ToListAsync();
         }
     }
 }

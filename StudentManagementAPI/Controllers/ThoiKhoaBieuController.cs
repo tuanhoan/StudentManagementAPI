@@ -217,7 +217,8 @@ namespace StudentManagementAPI.Controllers
         [HttpGet("progress")]
         public string Progress()
         {
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 _teacherSubjectTeamServices.ProgressData();
             });
 

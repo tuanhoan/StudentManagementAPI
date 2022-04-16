@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using StudentManagementAPI.Configurations;
+using StudentManagementAPI.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace StudentManagementAPI.Models
 {
-    public class StudentManagementContext : DbContext
+    public class StudentManagementContext : IdentityDbContext<AppUser, AppRole,Guid>
     {
         public StudentManagementContext(DbContextOptions<StudentManagementContext> options) : base(options)
         { }
@@ -17,6 +21,7 @@ namespace StudentManagementAPI.Models
         public DbSet<Teams> Teams { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Seed();
             modelBuilder.Entity<MapTeacherSubjectTeam>(entity =>
             {
                 entity.HasKey(e => new {e.TeamId, e.TeacherId, e.SubjectId})
@@ -60,6 +65,7 @@ namespace StudentManagementAPI.Models
                         .HasForeignKey(e => e.TeamId)
                         .OnDelete(DeleteBehavior.NoAction)
                         .HasConstraintName("fk_Teachers_Teams");
+                 
             }
           );
             modelBuilder.Entity<Teams>(entity =>
@@ -70,6 +76,15 @@ namespace StudentManagementAPI.Models
                       .HasDefaultValueSql("CURRENT_TIMESTAMP"); 
             }
           );
+
+            modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new {x.UserId, x.RoleId});
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserToken").HasKey(x=>x.UserId);
         }
     }
 }
