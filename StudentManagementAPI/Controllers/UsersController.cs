@@ -9,7 +9,7 @@ namespace StudentManagementAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class UsersController : ControllerBase
     {
         private UserServices _userServices;
@@ -20,17 +20,17 @@ namespace StudentManagementAPI.Controllers
 
         [HttpPost("Authenticate")]
         [AllowAnonymous]
-        public async Task<IActionResult> Authenticate([FromForm] LoginRequest request)
+        public async Task<IActionResult> Authenticate([FromBody] LoginRequest request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var result = await _userServices.Authencate(request);
-            if (string.IsNullOrEmpty(result)) { return BadRequest("UserName or Password incorrect."); }
-            return Ok(new { token = result });
+            if (string.IsNullOrEmpty(result.Item1)) { return BadRequest("UserName or Password incorrect."); }
+            return Ok(result);
         }
 
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromForm] RegisterRequest request)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var result = await _userServices.Register(request);

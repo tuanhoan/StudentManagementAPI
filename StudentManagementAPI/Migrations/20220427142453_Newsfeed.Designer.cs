@@ -10,8 +10,8 @@ using StudentManagementAPI.Models;
 namespace StudentManagementAPI.Migrations
 {
     [DbContext(typeof(StudentManagementContext))]
-    [Migration("20220416074741_add-identity")]
-    partial class addidentity
+    [Migration("20220427142453_Newsfeed")]
+    partial class Newsfeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -94,6 +94,13 @@ namespace StudentManagementAPI.Migrations
                     b.HasKey("UserId", "RoleId");
 
                     b.ToTable("AppUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
+                            RoleId = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -138,6 +145,16 @@ namespace StudentManagementAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
+                            ConcurrencyStamp = "4075efee-9a8f-4ec0-9417-acac947379fe",
+                            Description = "Administrator role",
+                            Name = "admin",
+                            NormalizedName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.AppUser", b =>
@@ -199,6 +216,52 @@ namespace StudentManagementAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
+                            AccessFailedCount = 0,
+                            Birthday = new DateTime(2000, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcurrencyStamp = "93648965-d23f-43b4-8943-ebad2e8b58d7",
+                            Email = "tuanhoan@gmail.com",
+                            EmailConfirmed = true,
+                            FullName = "Tuấn Hoàn",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "tuanhoan@gmail.com",
+                            NormalizedUserName = "tuanhoan",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJmUuusS+E5eF4Oyg0i7XnZsEypjbYsTUErUyZVaYeMpM+qTsqoZcA3Q7X6/IneLQQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "tuanhoan"
+                        });
+                });
+
+            modelBuilder.Entity("StudentManagementAPI.Models.Comment", b =>
+                {
+                    b.Property<int>("NewsFeedId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImgSources")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NewsFeedId", "UserId", "CreatedAt");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.MapTeacherSubjectTeam", b =>
@@ -231,6 +294,31 @@ namespace StudentManagementAPI.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("MapTeacherSubjectTeams");
+                });
+
+            modelBuilder.Entity("StudentManagementAPI.Models.NewsFeed", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .HasName("pk_newFeed");
+
+                    b.ToTable("NewsFeeds");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.Subjects", b =>
@@ -296,7 +384,7 @@ namespace StudentManagementAPI.Migrations
                     b.Property<string>("SkipDay")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -308,7 +396,7 @@ namespace StudentManagementAPI.Migrations
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("SubjectId");
 
                     b.ToTable("Teachers");
                 });
@@ -328,13 +416,39 @@ namespace StudentManagementAPI.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id")
                         .HasName("pk_Teams");
 
+                    b.HasIndex("TeacherId");
+
                     b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("StudentManagementAPI.Models.Comment", b =>
+                {
+                    b.HasOne("StudentManagementAPI.Models.NewsFeed", "NewsFeedNavigation")
+                        .WithMany("Comments")
+                        .HasForeignKey("NewsFeedId")
+                        .HasConstraintName("fk_newFeed_Comment")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StudentManagementAPI.Models.AppUser", "UserNavigation")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("fk_newFeed_User")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NewsFeedNavigation");
+
+                    b.Navigation("UserNavigation");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.MapTeacherSubjectTeam", b =>
@@ -375,37 +489,58 @@ namespace StudentManagementAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentManagementAPI.Models.Teams", "TeamNavigation")
+                    b.HasOne("StudentManagementAPI.Models.Subjects", "SubjectNavigation")
                         .WithMany("Teachers")
-                        .HasForeignKey("TeamId")
-                        .HasConstraintName("fk_Teachers_Teams")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("SubjectId")
+                        .HasConstraintName("fk_Teachers_Subject")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("AppUser");
 
-                    b.Navigation("TeamNavigation");
+                    b.Navigation("SubjectNavigation");
+                });
+
+            modelBuilder.Entity("StudentManagementAPI.Models.Teams", b =>
+                {
+                    b.HasOne("StudentManagementAPI.Models.Teachers", "TeachersNavigation")
+                        .WithMany("Teams")
+                        .HasForeignKey("TeacherId")
+                        .HasConstraintName("fk_Teams_Teachers")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("TeachersNavigation");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.AppUser", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Teachers");
+                });
+
+            modelBuilder.Entity("StudentManagementAPI.Models.NewsFeed", b =>
+                {
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.Subjects", b =>
                 {
                     b.Navigation("MapTeacherSubjectTeams");
+
+                    b.Navigation("Teachers");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.Teachers", b =>
                 {
                     b.Navigation("MapTeacherSubjectTeams");
+
+                    b.Navigation("Teams");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.Teams", b =>
                 {
                     b.Navigation("MapTeacherSubjectTeams");
-
-                    b.Navigation("Teachers");
                 });
 #pragma warning restore 612, 618
         }

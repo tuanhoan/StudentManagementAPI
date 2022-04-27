@@ -19,6 +19,8 @@ namespace StudentManagementAPI.Models
         public DbSet<Subjects> Subjects { get; set; }
         public DbSet<Teachers> Teachers { get; set; }
         public DbSet<Teams> Teams { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<NewsFeed> NewsFeeds { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Seed();
@@ -60,12 +62,18 @@ namespace StudentManagementAPI.Models
                 entity.Property(p => p.CreatedAt)
                       .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                entity.HasOne<Teams>(s => s.TeamNavigation)
-                        .WithMany(c => c.Teachers)
-                        .HasForeignKey(e => e.TeamId)
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .HasConstraintName("fk_Teachers_Teams");
-                 
+                //entity.HasOne<Teams>(s => s.TeamNavigation)
+                //        .WithMany(c => c.Teachers)
+                //        .HasForeignKey(e => e.TeamId)
+                //        .OnDelete(DeleteBehavior.NoAction)
+                //        .HasConstraintName("fk_Teachers_Teams");
+
+                entity.HasOne<Subjects>(s => s.SubjectNavigation)
+                       .WithMany(c => c.Teachers)
+                       .HasForeignKey(e => e.SubjectId)
+                       .OnDelete(DeleteBehavior.NoAction)
+                       .HasConstraintName("fk_Teachers_Subject");
+
             }
           );
             modelBuilder.Entity<Teams>(entity =>
@@ -73,9 +81,35 @@ namespace StudentManagementAPI.Models
                 entity.HasKey(c => c.Id)
                         .HasName("pk_Teams");
                 entity.Property(p => p.CreatedAt)
-                      .HasDefaultValueSql("CURRENT_TIMESTAMP"); 
+                      .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                entity.HasOne<Teachers>(s => s.TeachersNavigation)
+                        .WithMany(c => c.Teams)
+                        .HasForeignKey(e => e.TeacherId)
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasConstraintName("fk_Teams_Teachers");
             }
           );
+
+            modelBuilder.Entity<NewsFeed>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .HasName("pk_newFeed");
+            });
+
+            modelBuilder.Entity<Comment>(e =>
+            {
+                e.HasKey(e => new { e.NewsFeedId, e.UserId, e.CreatedAt });
+                e.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                e.HasOne(c => c.NewsFeedNavigation)
+                    .WithMany(c => c.Comments)
+                    .HasForeignKey(e => e.NewsFeedId)
+                    .HasConstraintName("fk_newFeed_Comment");
+                e.HasOne(c => c.UserNavigation)
+                    .WithMany(c => c.Comments)
+                    .HasForeignKey(e => e.UserId)
+                    .HasConstraintName("fk_newFeed_User");
+
+            });
 
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());

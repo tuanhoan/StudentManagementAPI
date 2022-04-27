@@ -10,8 +10,8 @@ using StudentManagementAPI.Models;
 namespace StudentManagementAPI.Migrations
 {
     [DbContext(typeof(StudentManagementContext))]
-    [Migration("20220416075914_add-identity-data")]
-    partial class addidentitydata
+    [Migration("20220418145609_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -150,7 +150,7 @@ namespace StudentManagementAPI.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "f494ea69-5cd3-4ff6-836e-52e70ad924e7",
+                            ConcurrencyStamp = "56baf9ae-a6c4-40bc-8e90-a77d6ad07ccb",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -223,14 +223,14 @@ namespace StudentManagementAPI.Migrations
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
                             Birthday = new DateTime(2000, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "b78ddf1b-f36c-4652-af1d-8ed3aa630cf0",
+                            ConcurrencyStamp = "0e21ec29-5f30-4df1-9d2b-6c80567b1c9a",
                             Email = "tuanhoan@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Tuấn Hoàn",
                             LockoutEnabled = false,
                             NormalizedEmail = "tuanhoan@gmail.com",
                             NormalizedUserName = "tuanhoan",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGScw4SYAohTbgJAzb8fN6Xf0xQzb6CZwXyf3JD6kWM+hHpbtZYekV6ebeNk9tnNcw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJUEGsXj04YmrvPyDkj2OOEhnbz1xQkkfwJl/tPOIjhq5IjiuQszZ4P97eWqHepl1Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -333,7 +333,7 @@ namespace StudentManagementAPI.Migrations
                     b.Property<string>("SkipDay")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<int>("SubjectId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -345,7 +345,7 @@ namespace StudentManagementAPI.Migrations
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("SubjectId");
 
                     b.ToTable("Teachers");
                 });
@@ -365,11 +365,16 @@ namespace StudentManagementAPI.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TeacherId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id")
                         .HasName("pk_Teams");
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Teams");
                 });
@@ -412,15 +417,27 @@ namespace StudentManagementAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentManagementAPI.Models.Teams", "TeamNavigation")
+                    b.HasOne("StudentManagementAPI.Models.Subjects", "SubjectNavigation")
                         .WithMany("Teachers")
-                        .HasForeignKey("TeamId")
-                        .HasConstraintName("fk_Teachers_Teams")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("SubjectId")
+                        .HasConstraintName("fk_Teachers_Subject")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("AppUser");
 
-                    b.Navigation("TeamNavigation");
+                    b.Navigation("SubjectNavigation");
+                });
+
+            modelBuilder.Entity("StudentManagementAPI.Models.Teams", b =>
+                {
+                    b.HasOne("StudentManagementAPI.Models.Teachers", "TeachersNavigation")
+                        .WithMany("Teams")
+                        .HasForeignKey("TeacherId")
+                        .HasConstraintName("fk_Teams_Teachers")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("TeachersNavigation");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.AppUser", b =>
@@ -431,18 +448,20 @@ namespace StudentManagementAPI.Migrations
             modelBuilder.Entity("StudentManagementAPI.Models.Subjects", b =>
                 {
                     b.Navigation("MapTeacherSubjectTeams");
+
+                    b.Navigation("Teachers");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.Teachers", b =>
                 {
                     b.Navigation("MapTeacherSubjectTeams");
+
+                    b.Navigation("Teams");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.Teams", b =>
                 {
                     b.Navigation("MapTeacherSubjectTeams");
-
-                    b.Navigation("Teachers");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using StudentManagementAPI.Models;
 using StudentManagementAPI.ViewModel.Users;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -29,17 +30,17 @@ namespace StudentManagementAPI.Services
             _config = config;
         }
 
-        public async Task<string> Authencate(LoginRequest request)
+        public async Task<(string,string, IList<string>, Guid)> Authencate(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
             {
-                return null;
+                return (null, null, null, new Guid());
             }
             var result = await _signInManager.PasswordSignInAsync(user, request.Password, request.RememberMe, true);
             if (!result.Succeeded)
             {
-                return null;
+                return (null, null, null, new Guid());
             }
             var roles = await _userManager.GetRolesAsync(user);
             var claims = new[]
@@ -56,7 +57,7 @@ namespace StudentManagementAPI.Services
                 claims,
                 expires: DateTime.Now.AddHours(3),
                 signingCredentials: creds);
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return (new JwtSecurityTokenHandler().WriteToken(token),user.UserName, roles, user.Id);
         }
 
         public async Task<bool> Register(RegisterRequest request)
@@ -71,7 +72,7 @@ namespace StudentManagementAPI.Services
             };
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
-            {
+            { 
                 return true;
             }
             return false;

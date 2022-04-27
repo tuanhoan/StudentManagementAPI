@@ -12,7 +12,7 @@ namespace StudentManagementAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class ThoiKhoaBieuController : ControllerBase
     {
         private readonly MapTeacherSubjectTeamServices _teacherSubjectTeamServices;
@@ -72,13 +72,7 @@ namespace StudentManagementAPI.Controllers
                     //workSheet.Hidden = OfficeOpenXml.eWorkSheetHidden.Hidden;
                 }
 
-                //if (workSheet.Dimension != null)
-                //{
-                //    for (int i = 0; i < objects.Count; i++)
-                //    {
-                //        workSheet.Cells[startRow, 1, startRow, workSheet.Dimension.End.Column].Copy(workSheet.Cells[startRow + i, 1, startRow + i, workSheet.Dimension.End.Column]);
-                //    }
-                //}
+              
                 List<List<string>> OneTeam = new List<List<string>>();
                 List<List<string>> NewList = new List<List<string>>();
                 List<List<string>> listkk = new List<List<string>>();
@@ -148,11 +142,11 @@ namespace StudentManagementAPI.Controllers
                                             mang1chieu[i] = mang1chieu[j + 4];
                                             mang1chieu[j + 4] = temp;
                                         }
-                                        else
-                                        {
-                                            mang1chieu[i] = mang1chieu[j + 5];
-                                            mang1chieu[j + 5] = temp;
-                                        }
+                                        //else
+                                        //{
+                                        //    mang1chieu[i] = mang1chieu[j + 5];
+                                        //    mang1chieu[j + 5] = temp;
+                                        //}
 
                                     }
                                 }

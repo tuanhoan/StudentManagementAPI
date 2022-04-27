@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace StudentManagementAPI.Migrations
 {
-    public partial class addidentity : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -140,21 +140,6 @@ namespace StudentManagementAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teams",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_Teams", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Teachers",
                 columns: table => new
                 {
@@ -163,10 +148,10 @@ namespace StudentManagementAPI.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HasChildren = table.Column<bool>(type: "bit", nullable: false),
                     SkipDay = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TeamId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SubjectId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -178,9 +163,30 @@ namespace StudentManagementAPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_Teachers_Teams",
-                        column: x => x.TeamId,
-                        principalTable: "Teams",
+                        name: "fk_Teachers_Subject",
+                        column: x => x.SubjectId,
+                        principalTable: "Subjects",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Teams",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TeacherId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_Teams", x => x.Id);
+                    table.ForeignKey(
+                        name: "fk_Teams_Teachers",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
                         principalColumn: "Id");
                 });
 
@@ -215,6 +221,21 @@ namespace StudentManagementAPI.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.InsertData(
+                table: "AppRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
+                values: new object[] { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), "56baf9ae-a6c4-40bc-8e90-a77d6ad07ccb", "Administrator role", "admin", "admin" });
+
+            migrationBuilder.InsertData(
+                table: "AppUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"), new Guid("69bd714f-9576-45ba-b5b7-f00649be00de") });
+
+            migrationBuilder.InsertData(
+                table: "AppUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Birthday", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"), 0, new DateTime(2000, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), "0e21ec29-5f30-4df1-9d2b-6c80567b1c9a", "tuanhoan@gmail.com", true, "Tuấn Hoàn", false, null, "tuanhoan@gmail.com", "tuanhoan", "AQAAAAEAACcQAAAAEJUEGsXj04YmrvPyDkj2OOEhnbz1xQkkfwJl/tPOIjhq5IjiuQszZ4P97eWqHepl1Q==", null, false, "", false, "tuanhoan" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_MapTeacherSubjectTeams_SubjectId",
                 table: "MapTeacherSubjectTeams",
@@ -232,9 +253,14 @@ namespace StudentManagementAPI.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teachers_TeamId",
+                name: "IX_Teachers_SubjectId",
                 table: "Teachers",
-                column: "TeamId");
+                column: "SubjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_TeacherId",
+                table: "Teams",
+                column: "TeacherId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -261,7 +287,7 @@ namespace StudentManagementAPI.Migrations
                 name: "MapTeacherSubjectTeams");
 
             migrationBuilder.DropTable(
-                name: "Subjects");
+                name: "Teams");
 
             migrationBuilder.DropTable(
                 name: "Teachers");
@@ -270,7 +296,7 @@ namespace StudentManagementAPI.Migrations
                 name: "AppUsers");
 
             migrationBuilder.DropTable(
-                name: "Teams");
+                name: "Subjects");
         }
     }
 }

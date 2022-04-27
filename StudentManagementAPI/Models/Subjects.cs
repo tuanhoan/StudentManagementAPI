@@ -12,6 +12,7 @@ namespace StudentManagementAPI.Models
         public Subjects()
         {
             MapTeacherSubjectTeams = new HashSet<MapTeacherSubjectTeam>();
+            Teachers = new HashSet<Teachers>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -23,5 +24,6 @@ namespace StudentManagementAPI.Models
         public virtual DateTime CreatedAt { get; set; }
         public virtual DateTime UpdatedAt { get; set; } 
         public virtual ICollection<MapTeacherSubjectTeam> MapTeacherSubjectTeams { get; set; }
+        public virtual ICollection<Teachers> Teachers { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -119,6 +120,9 @@ namespace StudentManagementAPI
             services.AddTransient<SubjectServices>();
             services.AddTransient<TeacherServices>();
             services.AddTransient<MapTeacherSubjectTeamServices>();
+            services.AddTransient<ReadDataFromExcelService>();
+            services.AddTransient<NewsfeedService>(); 
+            services.AddTransient<CommentService>(); 
 
             //services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
             //services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
