@@ -1,0 +1,47 @@
+<!-- <app-teacher-component></app-teacher-component> -->
+<a  [routerLink]="['/teachers',2]" routerLinkActive="router-link-active">hhh</a>
+<div class="d-flex" cdkDropListGroup>
+  <div class="example-container" *ngFor="let data of result; let i = index">
+    <div [ngStyle]="{'border': 'solid 2px #ccc'}">
+      <div   class="example-box" [ngStyle]="{'justify-content':'center'}">{{teams[i].name}}</div>
+    </div>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="data"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div *ngFor="let item of data; let index = index"  cdkDrag>
+        <div
+          [ngClass]="
+            index == 3 || index == 7 ||
+            index == 11 ||
+            index == 15 ||
+            index == 19 ||
+            index == 23 ||
+            index == 27 ||
+            index == 31 ||
+            index == 35
+              ? 'example-box-ext'
+              : 'example-box'
+          "
+          [ngStyle]="{ 'background-color': item.color }"
+        >
+          {{ item.name }}
+        </div>
+      </div>
+      <!-- <div
+        [ngStyle]="{ 'background-color': item.color }"
+        class="example-box"
+        *ngFor="let item of data; let index = index"
+        cdkDrag
+      >
+        {{ item.name }}
+      </div> -->
+
+    </div>
+  </div>
+</div>
+
+<button mat-raised-button color="primary" (click)="FillColor()">Primary</button>
