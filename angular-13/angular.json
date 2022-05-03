@@ -15,7 +15,7 @@
               "rxjs-compat",
               "rxjs",
               "hammerjs",
-              "chartist"              
+              "chartist"
             ],
             "outputPath": "dist",
             "index": "src/index.html",
@@ -27,9 +27,11 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/chartist/dist/chartist.css",
               "src/styles.css",
-              "src/assets/styles/style.scss"
+              "src/assets/styles/style.scss",
+              "src/assets/user/scss/style.scss"
             ],
             "scripts": [],
             "vendorChunk": true,

@@ -22,6 +22,7 @@ import { AuthGuard } from './auth.guard';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginPageComponent } from './Login/login-page/login-page.component';
 import { RegisterPageComponent } from './Login/register-page/register-page.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { RegisterPageComponent } from './Login/register-page/register-page.compo
     HttpClientModule,
     SharedModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(AppRoutes)
+    RouterModule.forRoot(AppRoutes),
+    NgbModule
   ],
   providers: [
     {

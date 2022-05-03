@@ -1,0 +1,46 @@
+/*
+Template Name: Wrakit UI Kit
+Author: wrappixel
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+
+/**
+ * Table Of Content
+ *
+ * 	1. Globals
+ *	2. Headers
+ *	3. Navigations
+ *	4. Banners
+ *	5. Footers
+ *	6. app
+ *	7. Widgets
+ *	8. Custom Templates
+ */
+
+// @import "variable";
+
+// @import "animate.css";
+
+// @import "app";
+// @import "common";
+// @import "extra";
+// @import "authentication";
+// @import "responsive";
+
+// @import "icons/font-awesome/css/font-awesome.min.css";
+// @import "icons/simple-line-icons/css/simple-line-icons.css";
+// @import "icons/themify-icons/themify-icons.css";
+
+@import "../../user/scss/variable.scss";
+@import "../../user/scss/animate.css";
+
+@import "../../user/scss/app.scss";
+@import "../../user/scss/common.scss";
+@import "../../user/scss/extra.scss";
+@import "../../user/scss/authentication.scss";
+@import "../../user/scss/responsive.scss";
+
+@import "../../user/scss/icons//font-awesome/css/font-awesome.min.css";
+@import "../../user/scss/icons/simple-line-icons/css/simple-line-icons.css";
+@import "../../user/scss/icons/themify-icons/themify-icons.css";
