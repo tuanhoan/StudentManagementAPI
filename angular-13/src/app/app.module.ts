@@ -23,6 +23,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { LoginPageComponent } from './Login/login-page/login-page.component';
 import { RegisterPageComponent } from './Login/register-page/register-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormatContentPipe } from './Pipe/format-content.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     ErrorPageComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    FormatContentPipe
   ],
   imports: [
     BrowserModule,

@@ -2,23 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceblogService } from '../blog-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '../blog-type';
+import { NewsFeedService } from '../newsfeed.service';
 
 @Component({
-  selector: 'app-blog-detail',
-  templateUrl: './blog-detail.component.html',
-  styleUrls: ['./blog-detail.component.css']
+  selector: 'app-newsfeed-detail',
+  templateUrl: './newsfeed-detail.component.html',
+  styleUrls: ['./newsfeed-detail.component.css']
 })
-export class BlogDetailComponent implements OnInit {
+export class NewsfeedDetailComponent implements OnInit {
 
   id: any;
-  blogDetail: Blog | null = null;
+  blogDetail: any | null = null;
 
-  constructor(activatedRouter: ActivatedRoute, public service: ServiceblogService, public router: Router) {
+  constructor(activatedRouter: ActivatedRoute,
+     public service: ServiceblogService,
+     public router: Router,
+     private newsfeedService: NewsFeedService) {
     this.id = activatedRouter.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
-    this.blogDetail = this.service.Blogs.filter(x => x.id === +this.id)[0];
+    // this.blogDetail = this.service.Blogs.filter(x => x.id === +this.id)[0];
+    this.newsfeedService.getById(this.id).subscribe((data) => {
+      console.log(data);
+      this.blogDetail = data;
+    });
 
   }
 

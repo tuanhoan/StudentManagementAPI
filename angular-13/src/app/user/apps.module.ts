@@ -7,9 +7,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppsComponent } from './apps.component';
-import { BlogComponent } from './blog/blog.component';
+import { NewsfeedComponent } from './blog/newsfeed.component';
 import { AboutComponent } from './about/about.component';
-import { BlogDetailComponent } from './blog/blog-detail/blog-detail.component';
+import { NewsfeedDetailComponent } from './blog/newsfeed-detail/newsfeed-detail.component';
 
 import { ServiceblogService } from './blog/blog-service.service';
 import { RelayOnComponent } from './about/About-Components/relay-on/relay-on.component';
@@ -20,13 +20,14 @@ import { FullComponent } from './layout/full/full.component';
 import { BannerComponent } from './shared/banner/banner.component';
 import { BannerNavigationComponent } from './shared/banner-navigation/banner-navigation.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
     AppsComponent,
-    BlogComponent,
+    NewsfeedComponent,
     AboutComponent,
-    BlogDetailComponent,
+    NewsfeedDetailComponent,
     RelayOnComponent,
     TopContentComponent,
     FullComponent,
@@ -34,6 +35,7 @@ import { FooterComponent } from './shared/footer/footer.component';
     // BannerContentComponent,
     BannerNavigationComponent,
     FooterComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,

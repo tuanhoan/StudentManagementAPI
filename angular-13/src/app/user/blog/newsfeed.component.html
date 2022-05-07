@@ -45,21 +45,19 @@
     <!-- Column -->
     <div
       class="col-md-8 no-trans border-bottom mb-4"
-      *ngFor="let bl of service.Blogs"
+      *ngFor="let bl of newsfeeds"
     >
       <div class="card" data-aos="flip-left" data-aos-duration="1200">
         <div class="row">
           <div class="col-md-2 no-trans">
-            <span class="text-dark font-medium">{{ bl.blogDate }}</span>
+            <span class="text-dark font-medium">{{ bl.createAt }}</span>
             <h6 class="card-subtitle font-12 mt-1">By John Deo</h6>
           </div>
           <div class="col-md-7 no-trans">
             <h5 class="font-medium cursor-pointer" (click)="viewDetail(bl.id)">
-              {{ bl.heading.substring(0, 50) }}..
+              {{ bl.title.substring(0, 40) }} ...
             </h5>
-            <p class="m-t-20">
-              {{ bl.subHeading }}
-            </p>
+            <p class="m-t-20">{{ bl.content.substring(0, 220) }} ...</p>
           </div>
           <div class="col-md-3 no-trans">
             <a
