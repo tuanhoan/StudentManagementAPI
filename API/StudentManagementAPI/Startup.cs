@@ -123,6 +123,7 @@ namespace StudentManagementAPI
             services.AddTransient<ReadDataFromExcelService>();
             services.AddTransient<NewsfeedService>(); 
             services.AddTransient<CommentService>(); 
+            services.AddTransient<StudentService>(); 
 
             //services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
             //services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();

@@ -44,6 +44,8 @@ import { VideoCallComponent } from './VideoChat/video-call/video-call.component'
 import { CallInfoDialogComponent } from './VideoChat/call-info-dialog/call-info-dialog.component';
 import { PostNewsFeedComponent } from './Admin/post-newsfeed/post-newsfeed.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { StudentComponent } from './Admin/student/student.component';
+import { StudentListComponent } from './Admin/student/student-list/student-list.component';
 
 @NgModule({
   imports: [
@@ -88,7 +90,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     UserProfileComponent,
     VideoCallComponent,
     CallInfoDialogComponent,
-    PostNewsFeedComponent
+    PostNewsFeedComponent,
+    StudentComponent,
+    StudentListComponent
   ]
 })
 

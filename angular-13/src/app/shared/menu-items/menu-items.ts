@@ -13,6 +13,7 @@ const MENUITEMS = [
   { state: 'videocall', name: 'Video Call', type: 'link', icon: 'av_timer' },
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
   { state: 'post-newsfeed', name: 'Newsfeed', type: 'link', icon: 'av_timer' },
+  { state: 'students-list', name: 'Students', type: 'link', icon: 'av_timer' },
   { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
   { state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy' },
   { state: 'lists', type: 'link', name: 'Lists', icon: 'view_list' },

@@ -24,6 +24,8 @@ import { UserProfileComponent } from "./user-profile/user-profile.component";
 import { VideoCallComponent } from "./VideoChat/video-call/video-call.component";
 import { PostNewsFeedComponent } from "./Admin/post-newsfeed/post-newsfeed.component";
 import { ProfileComponent } from "../common/profile/profile.component";
+import { StudentComponent } from "./Admin/student/student.component";
+import { StudentListComponent } from "./Admin/student/student-list/student-list.component";
 
 export const MaterialRoutes: Routes = [
   {
@@ -112,4 +114,6 @@ export const MaterialRoutes: Routes = [
   },
   { path: "videocall", component: VideoCallComponent },
   { path: "post-newsfeed", component: PostNewsFeedComponent },
+  { path: "students", component: StudentComponent },
+  { path: "students-list", component: StudentListComponent },
 ];

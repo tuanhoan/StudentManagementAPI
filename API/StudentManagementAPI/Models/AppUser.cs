@@ -15,6 +15,9 @@ namespace StudentManagementAPI.Models
         public Teachers TeacherNavigation { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
 
+        public string Address { get; set; }
+        public string AvatarPath { get; set; }
+
         public Students StudentNavigation { get; set; } 
     }
 }

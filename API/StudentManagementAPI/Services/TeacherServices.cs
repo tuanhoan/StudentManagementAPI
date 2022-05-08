@@ -56,7 +56,7 @@ namespace StudentManagementAPI.Services
                 .ToListAsync();
         } 
 
-        public string RemoveUnicode(string text)
+        public static string RemoveUnicode(string text)
         {
             string[] arr1 = new string[] { "á", "à", "ả", "ã", "ạ", "â", "ấ", "ầ", "ẩ", "ẫ", "ậ", "ă", "ắ", "ằ", "ẳ", "ẵ", "ặ",
     "đ",
