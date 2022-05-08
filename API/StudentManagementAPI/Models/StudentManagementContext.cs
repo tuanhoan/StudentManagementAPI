@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace StudentManagementAPI.Models
 {
-    public class StudentManagementContext : IdentityDbContext<AppUser, AppRole,Guid>
+    public class StudentManagementContext : IdentityDbContext<AppUser, AppRole, Guid>
     {
         public StudentManagementContext(DbContextOptions<StudentManagementContext> options) : base(options)
         { }
@@ -21,12 +21,13 @@ namespace StudentManagementAPI.Models
         public DbSet<Teams> Teams { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<NewsFeed> NewsFeeds { get; set; }
+        public DbSet<Students> Students { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Seed();
             modelBuilder.Entity<MapTeacherSubjectTeam>(entity =>
             {
-                entity.HasKey(e => new {e.TeamId, e.TeacherId, e.SubjectId})
+                entity.HasKey(e => new { e.TeamId, e.TeacherId, e.SubjectId })
                     .HasName("pk_MapTeacherSubjectTeams");
                 entity.Property(p => p.CreatedAt)
                       .HasDefaultValueSql("CURRENT_TIMESTAMP");
@@ -76,6 +77,20 @@ namespace StudentManagementAPI.Models
 
             }
           );
+            modelBuilder.Entity<Students>(entity =>
+            {
+                entity.HasKey(c => c.Id)
+                        .HasName("pk_Students");
+                entity.Property(p => p.CreatedAt)
+                      .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                entity.HasOne(c => c.TeamNavigation)
+                     .WithMany(c => c.Students)
+                     .HasForeignKey(e => e.TeamId)
+                     .HasConstraintName("fk_team_student");
+
+            }
+         );
             modelBuilder.Entity<Teams>(entity =>
             {
                 entity.HasKey(c => c.Id)
@@ -87,6 +102,8 @@ namespace StudentManagementAPI.Models
                         .HasForeignKey(e => e.TeacherId)
                         .OnDelete(DeleteBehavior.NoAction)
                         .HasConstraintName("fk_Teams_Teachers");
+
+                
             }
           );
 
@@ -115,10 +132,10 @@ namespace StudentManagementAPI.Models
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
 
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
-            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new {x.UserId, x.RoleId});
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.UserId, x.RoleId });
             modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
-            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserToken").HasKey(x=>x.UserId);
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserToken").HasKey(x => x.UserId);
         }
     }
 }

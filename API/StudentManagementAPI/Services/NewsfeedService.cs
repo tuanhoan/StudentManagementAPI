@@ -26,22 +26,23 @@ namespace StudentManagementAPI.Services
         public async Task AddNewsfeed(NewsFeed newsFeed, IFormFile formFile)
         {
             var result = _context.NewsFeeds.Add(newsFeed);
-            newsFeed.Image = formFile.FileName;
+            newsFeed.Image = formFile?.FileName;
             newsFeed.CreateAt = DateTime.Now;
             await _context.SaveChangesAsync();
-
-            var x = _hostingEnvironment.ContentRootPath.Replace("API\\StudentManagementAPI\\", "") + "\\angular-13\\src\\assets" + "\\Upload\\Newsfeed\\" + result.Entity.Id;
-            if (!Directory.Exists(x))
+            if (formFile != null)
             {
-                Directory.CreateDirectory(x);
+                var x = _hostingEnvironment.ContentRootPath.Replace("API\\StudentManagementAPI\\", "") + "\\angular-13\\src\\assets" + "\\Upload\\Newsfeed\\" + result.Entity.Id;
+                if (!Directory.Exists(x))
+                {
+                    Directory.CreateDirectory(x);
+                }
+                //string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+                string filePath = Path.Combine(x, formFile.FileName);
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await formFile.CopyToAsync(fileStream);
+                }
             }
-            //string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
-            string filePath = Path.Combine(x, formFile.FileName);
-            using (Stream fileStream = new FileStream(filePath, FileMode.Create))
-            {
-                await formFile.CopyToAsync(fileStream);
-            }
-            Console.WriteLine("");
         }
 
         public async Task<List<NewsFeed>> GetAllAsync()
@@ -51,7 +52,7 @@ namespace StudentManagementAPI.Services
 
         public async Task<NewsFeed> GetNewsFeedById(int id)
         {
-            var roothPath ="assets\\Upload\\Newsfeed\\" + id;
+            var roothPath = "assets\\Upload\\Newsfeed\\" + id;
             var result = await _context.NewsFeeds.FirstOrDefaultAsync(x => x.Id == id);
             result.Image = roothPath + "\\" + result.Image;
             return result;

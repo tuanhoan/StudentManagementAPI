@@ -7,6 +7,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FullComponent } from './layouts/full/full.component';
@@ -24,6 +25,7 @@ import { LoginPageComponent } from './Login/login-page/login-page.component';
 import { RegisterPageComponent } from './Login/register-page/register-page.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormatContentPipe } from './Pipe/format-content.pipe';
+import { ProfileComponent } from './common/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { FormatContentPipe } from './Pipe/format-content.pipe';
     ErrorPageComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    FormatContentPipe
+    FormatContentPipe,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,8 @@ import { FormatContentPipe } from './Pipe/format-content.pipe';
     SharedModule,
     ReactiveFormsModule,
     RouterModule.forRoot(AppRoutes),
-    NgbModule
+    NgbModule,
+    CKEditorModule
   ],
   providers: [
     {

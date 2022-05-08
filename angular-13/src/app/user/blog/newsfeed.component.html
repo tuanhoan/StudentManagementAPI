@@ -9,18 +9,17 @@
     <div class="row justify-content-center">
       <!-- Column -->
       <div class="col-lg-9 col-md-6 align-self-center text-center no-trans">
-        <h1 class="title">Free Angular Blog</h1>
+        <h1 class="title">Trường THPT Lý Tự Trọng - Thạch Hà - Hà Tĩnh</h1>
         <h5 class="subtitle op-5">
-          Want a blog app with ng-bootstrap ? Here is the fully workable blog
-          app in which we are giving add post, edit post and delete post.
+          Tuổi trẻ là tương lai đất nước
         </h5>
 
-        <a
+        <!-- <a
           href="https://www.wrappixel.com/free-wrapkit-angular-blog"
           class="btn btn-md m-t-30 btn-success-gradiant font-14"
           target="blank"
           >Download Free</a
-        >
+        > -->
       </div>
       <!-- Column -->
     </div>
@@ -50,14 +49,15 @@
       <div class="card" data-aos="flip-left" data-aos-duration="1200">
         <div class="row">
           <div class="col-md-2 no-trans">
-            <span class="text-dark font-medium">{{ bl.createAt }}</span>
+            <span class="text-dark font-medium">{{ bl.createAt | date: "medium"}}</span>
             <h6 class="card-subtitle font-12 mt-1">By John Deo</h6>
           </div>
           <div class="col-md-7 no-trans">
             <h5 class="font-medium cursor-pointer" (click)="viewDetail(bl.id)">
               {{ bl.title.substring(0, 40) }} ...
             </h5>
-            <p class="m-t-20">{{ bl.content.substring(0, 220) }} ...</p>
+            <div [innerHTML]="bl?.content.substring(0, 220)"></div>
+            <!-- <p class="m-t-20">{{ bl.content.substring(0, 220) }} ...</p> -->
           </div>
           <div class="col-md-3 no-trans">
             <a

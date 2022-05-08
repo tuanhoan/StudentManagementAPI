@@ -18,9 +18,9 @@ namespace StudentManagementAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateNewsFeed([FromForm] NewsFeed newsFeed, IFormFile formFile)
+        public async Task<IActionResult> CreateNewsFeed([FromBody] NewsFeed newsFeed)
         {
-            await _newsfeedService.AddNewsfeed(newsFeed, formFile);
+            await _newsfeedService.AddNewsfeed(newsFeed, null);
             return Ok();
         }
 

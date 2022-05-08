@@ -22,6 +22,8 @@ import { TeacherDetailsComponent } from "./Admin/teacher-details/teacher-details
 import { AuthGuard } from "../auth.guard";
 import { UserProfileComponent } from "./user-profile/user-profile.component";
 import { VideoCallComponent } from "./VideoChat/video-call/video-call.component";
+import { PostNewsFeedComponent } from "./Admin/post-newsfeed/post-newsfeed.component";
+import { ProfileComponent } from "../common/profile/profile.component";
 
 export const MaterialRoutes: Routes = [
   {
@@ -106,7 +108,8 @@ export const MaterialRoutes: Routes = [
   },
   {
     path: "profile",
-    component: UserProfileComponent,
+    component: ProfileComponent,
   },
   { path: "videocall", component: VideoCallComponent },
+  { path: "post-newsfeed", component: PostNewsFeedComponent },
 ];

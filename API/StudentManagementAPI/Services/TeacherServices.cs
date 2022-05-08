@@ -48,9 +48,11 @@ namespace StudentManagementAPI.Services
         }
         public async Task<List<Teachers>> GetAllAsync()
         {
+
             return await _context.Teachers
                 .Include(x=>x.AppUser)
                 .Include(x=>x.SubjectNavigation)
+                .AsNoTracking()
                 .ToListAsync();
         } 
 

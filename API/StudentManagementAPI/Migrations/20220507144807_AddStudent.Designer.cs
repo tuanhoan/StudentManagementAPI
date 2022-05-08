@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentManagementAPI.Models;
 
 namespace StudentManagementAPI.Migrations
 {
     [DbContext(typeof(StudentManagementContext))]
-    partial class StudentManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20220507144807_AddStudent")]
+    partial class AddStudent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,7 +150,7 @@ namespace StudentManagementAPI.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "8e4c2a93-8f4f-4746-ac95-6146732f3889",
+                            ConcurrencyStamp = "69a45b4f-7392-4d59-acd1-4644edd4f65e",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -221,14 +223,14 @@ namespace StudentManagementAPI.Migrations
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
                             Birthday = new DateTime(2000, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "46793217-6dfd-438c-9941-0f52cdeb1492",
+                            ConcurrencyStamp = "3b63c9b9-7923-457f-97c0-909d8d91d22f",
                             Email = "tuanhoan@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Tuấn Hoàn",
                             LockoutEnabled = false,
                             NormalizedEmail = "tuanhoan@gmail.com",
                             NormalizedUserName = "tuanhoan",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEc+w7vO0d1W3uprMNP5iYOBvjBTn4ikPPri8xJ7qX92e17SnxMXCN8JGNxSQPXSTw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDDeOOFitDq7FRDF01Hv6lc3upv+6qYGF3vhjqwsf8gl01xk+kEah4dQudAhCyCd5g==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -340,13 +342,16 @@ namespace StudentManagementAPI.Migrations
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("TeamsId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id")
                         .HasName("pk_Students");
 
                     b.HasIndex("AppUserId")
                         .IsUnique();
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("TeamsId");
 
                     b.ToTable("Students");
                 });
@@ -519,16 +524,13 @@ namespace StudentManagementAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentManagementAPI.Models.Teams", "TeamNavigation")
-                        .WithMany("Students")
-                        .HasForeignKey("TeamId")
-                        .HasConstraintName("fk_team_student")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("StudentManagementAPI.Models.Teams", "Teams")
+                        .WithMany()
+                        .HasForeignKey("TeamsId");
 
                     b.Navigation("AppUser");
 
-                    b.Navigation("TeamNavigation");
+                    b.Navigation("Teams");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.Teachers", b =>
@@ -593,8 +595,6 @@ namespace StudentManagementAPI.Migrations
             modelBuilder.Entity("StudentManagementAPI.Models.Teams", b =>
                 {
                     b.Navigation("MapTeacherSubjectTeams");
-
-                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }

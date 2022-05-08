@@ -42,6 +42,8 @@ import { ProfilesComponent } from './profiles/profiles.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { VideoCallComponent } from './VideoChat/video-call/video-call.component';
 import { CallInfoDialogComponent } from './VideoChat/call-info-dialog/call-info-dialog.component';
+import { PostNewsFeedComponent } from './Admin/post-newsfeed/post-newsfeed.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   imports: [
@@ -56,7 +58,8 @@ import { CallInfoDialogComponent } from './VideoChat/call-info-dialog/call-info-
     DragDropModule,
     MatDividerModule,
     MatTableModule,
-    ClipboardModule
+    ClipboardModule,
+    CKEditorModule
   ],
   providers: [],
   entryComponents: [DialogOverviewExampleDialogComponent],
@@ -84,7 +87,8 @@ import { CallInfoDialogComponent } from './VideoChat/call-info-dialog/call-info-
     ProfilesComponent,
     UserProfileComponent,
     VideoCallComponent,
-    CallInfoDialogComponent
+    CallInfoDialogComponent,
+    PostNewsFeedComponent
   ]
 })
 

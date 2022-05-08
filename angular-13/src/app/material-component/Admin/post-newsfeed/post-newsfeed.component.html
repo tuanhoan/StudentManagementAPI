@@ -1,0 +1,20 @@
+<form (ngSubmit)="onSubmit()">
+  <h1>Đăng bài</h1>
+
+  <div>
+    <label for="name">Tiêu đề</label>
+    <input name="name" id="name" type="text" class="form-control" [(ngModel)]="model.title" placeholder="Nhập tiêu đề">
+  </div>
+
+  <label for="description">Nội dung</label>
+  <ckeditor
+    [editor]="Editor"
+    [(ngModel)]="model.content"
+    id="description"
+    name="description"
+    type="divarea"
+  >
+  </ckeditor>
+
+  <button type="submit">Submit</button>
+</form>

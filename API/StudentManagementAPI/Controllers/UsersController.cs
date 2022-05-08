@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StudentManagementAPI.Dto;
+using StudentManagementAPI.Models;
 using StudentManagementAPI.Services;
 using StudentManagementAPI.ViewModel.Users;
 using System.Threading.Tasks;
@@ -36,6 +38,18 @@ namespace StudentManagementAPI.Controllers
             var result = await _userServices.Register(request);
             if (!result) { return BadRequest("Register unsuccessful."); }
             return Ok();
+        }
+
+        [HttpGet("{userName}")]
+        public async Task<AppUser> GetCurrentUser(string userName)
+        {
+            return await _userServices.GetCurrentUser(userName);
+        }
+
+        [HttpPost("UpdateInfo")]
+        public async Task<AppUser> UpdateInfo(Profile profile)
+        {
+            return await _userServices.UpdateInfo(profile);
         }
     }
 }

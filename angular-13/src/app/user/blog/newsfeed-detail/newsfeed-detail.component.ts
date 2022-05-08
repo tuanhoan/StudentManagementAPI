@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ServiceblogService } from '../blog-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from '../blog-type';
@@ -7,7 +7,8 @@ import { NewsFeedService } from '../newsfeed.service';
 @Component({
   selector: 'app-newsfeed-detail',
   templateUrl: './newsfeed-detail.component.html',
-  styleUrls: ['./newsfeed-detail.component.css']
+  styleUrls: ['./newsfeed-detail.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class NewsfeedDetailComponent implements OnInit {
 

@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using StudentManagementAPI.Dto;
 using StudentManagementAPI.Models;
 using StudentManagementAPI.ViewModel.Users;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +17,7 @@ namespace StudentManagementAPI.Services
 {
     public class UserServices
     {
+        readonly StudentManagementContext _context;
         private UserManager<AppUser> _userManager;
         private SignInManager<AppUser> _signInManager;
         private RoleManager<AppRole> _roleManager;
@@ -21,16 +25,18 @@ namespace StudentManagementAPI.Services
         public UserServices(UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             RoleManager<AppRole> roleManager,
-            IConfiguration config
+            IConfiguration config,
+            StudentManagementContext context
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _config = config;
+            _context = context;
         }
 
-        public async Task<(string,string, IList<string>, Guid)> Authencate(LoginRequest request)
+        public async Task<(string, string, IList<string>, Guid)> Authencate(LoginRequest request)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user == null)
@@ -57,7 +63,7 @@ namespace StudentManagementAPI.Services
                 claims,
                 expires: DateTime.Now.AddHours(3),
                 signingCredentials: creds);
-            return (new JwtSecurityTokenHandler().WriteToken(token),user.UserName, roles, user.Id);
+            return (new JwtSecurityTokenHandler().WriteToken(token), user.UserName, roles, user.Id);
         }
 
         public async Task<bool> Register(RegisterRequest request)
@@ -72,10 +78,37 @@ namespace StudentManagementAPI.Services
             };
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
-            { 
+            {
                 return true;
             }
             return false;
+        }
+
+        public async Task<AppUser> GetCurrentUser(string usserName)
+        {
+            return await _context.Users.Where(x => x.UserName == usserName)
+                .Include(x => x.TeacherNavigation)
+                .Include(x => x.StudentNavigation)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<AppUser> UpdateInfo(Profile profile)
+        {
+            var user = await _userManager.FindByNameAsync(profile.username);
+
+            user.FullName = profile.fullName;
+            if (!String.IsNullOrEmpty(profile.birthday))
+            {
+                user.Birthday = Convert.ToDateTime(profile.birthday);
+            }
+
+            user.PhoneNumber = profile.phoneNumber;
+
+
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            return user;
         }
     }
 }
