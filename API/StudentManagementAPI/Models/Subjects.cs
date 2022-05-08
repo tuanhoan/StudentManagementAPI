@@ -13,11 +13,12 @@ namespace StudentManagementAPI.Models
         {
             MapTeacherSubjectTeams = new HashSet<MapTeacherSubjectTeam>();
             Teachers = new HashSet<Teachers>();
+            Scores = new HashSet<Score>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
         public int? LabId { get; set; }
-        public string? Block { get; set; }
+        public string Block { get; set; }
         public bool AvoidLastLesson { get; set; }
         public bool RequriedSpacing { get; set; }
         public int Priority { get; set; }
@@ -25,5 +26,6 @@ namespace StudentManagementAPI.Models
         public virtual DateTime UpdatedAt { get; set; } 
         public virtual ICollection<MapTeacherSubjectTeam> MapTeacherSubjectTeams { get; set; }
         public virtual ICollection<Teachers> Teachers { get; set; }
+        public virtual ICollection<Score> Scores { get; set; }
     }
 }

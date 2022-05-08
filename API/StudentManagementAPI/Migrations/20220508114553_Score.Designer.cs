@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentManagementAPI.Models;
 
 namespace StudentManagementAPI.Migrations
 {
     [DbContext(typeof(StudentManagementContext))]
-    partial class StudentManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20220508114553_Score")]
+    partial class Score
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,7 +150,7 @@ namespace StudentManagementAPI.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "ddb335be-c85b-41fe-8f70-e05efecfc418",
+                            ConcurrencyStamp = "d604f6fa-c3fc-4d2f-86cb-8c7b1f064944",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -227,14 +229,14 @@ namespace StudentManagementAPI.Migrations
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
                             Birthday = new DateTime(2000, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "d62a38b4-5e34-4228-849f-56841106e26f",
+                            ConcurrencyStamp = "72eaa2ef-5878-4bd3-a64f-264aec44a135",
                             Email = "tuanhoan@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Tuấn Hoàn",
                             LockoutEnabled = false,
                             NormalizedEmail = "tuanhoan@gmail.com",
                             NormalizedUserName = "tuanhoan",
-                            PasswordHash = "AQAAAAEAACcQAAAAEId9YMBxODqXenpKJFIb8/we/wBqL5hSxTUZnchrprQxxrkC3CJ1u5aRONIj9kOuOg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF2MheabBMuYK8skjbIHqtJAW9qyOzFf242iOVPUhXFVjqjiZoEXgtJY549TtrQlDA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -356,7 +358,7 @@ namespace StudentManagementAPI.Migrations
 
                     b.HasIndex("TestTypeId");
 
-                    b.ToTable("Scores");
+                    b.ToTable("Score");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.Semester", b =>
@@ -378,23 +380,7 @@ namespace StudentManagementAPI.Migrations
                     b.HasKey("Id")
                         .HasName("pk_semester");
 
-                    b.ToTable("Semesters");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Học Kì 1",
-                            TimeEnd = "2/15/2023 12:00:00 AM",
-                            TimeStart = "9/4/2022 12:00:00 AM"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Học Kì 2",
-                            TimeEnd = "6/5/2023 12:00:00 AM",
-                            TimeStart = "2/20/2023 12:00:00 AM"
-                        });
+                    b.ToTable("Semester");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.Students", b =>
@@ -554,27 +540,7 @@ namespace StudentManagementAPI.Migrations
                     b.HasKey("Id")
                         .HasName("pk_testType");
 
-                    b.ToTable("TestTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ScoreFactor = 1.0,
-                            TestName = "15P"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ScoreFactor = 2.0,
-                            TestName = "60P"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ScoreFactor = 3.0,
-                            TestName = "Học Kì"
-                        });
+                    b.ToTable("TestType");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.Comment", b =>

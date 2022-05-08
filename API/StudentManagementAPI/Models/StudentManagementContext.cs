@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using StudentManagementAPI.Configurations;
 using StudentManagementAPI.Extensions;
+using StudentManagementAPI.Seed;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,14 @@ namespace StudentManagementAPI.Models
         public DbSet<Comment> Comments { get; set; }
         public DbSet<NewsFeed> NewsFeeds { get; set; }
         public DbSet<Students> Students { get; set; }
+        public DbSet<Score> Scores { get; set; }
+        public DbSet<TestType> TestTypes { get; set; }
+        public DbSet<Semester> Semesters { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Seed();
+            ConstructSeedingData(modelBuilder);
+
             modelBuilder.Entity<MapTeacherSubjectTeam>(entity =>
             {
                 entity.HasKey(e => new { e.TeamId, e.TeacherId, e.SubjectId })
@@ -127,6 +133,45 @@ namespace StudentManagementAPI.Models
                     .HasConstraintName("fk_newFeed_User");
 
             });
+            modelBuilder.Entity<Semester>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .HasName("pk_semester");
+            });
+
+            modelBuilder.Entity<TestType>(entity =>
+            {
+                entity.HasKey(e => e.Id)
+                    .HasName("pk_testType");
+            });
+
+            modelBuilder.Entity<Score>(entity =>
+            {
+                entity.HasKey(e => new { e.SemesterId, e.StudentId, e.TestTypeId, e.SubjectId })
+                    .HasName("pk_score");
+                entity.Property(e => e.CreatedAt)
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                entity.HasOne<Semester>(e => e.SemesterNavigation)
+                    .WithMany(e => e.Scores)
+                    .HasForeignKey(e => e.SemesterId)
+                    .HasConstraintName("fk_score_semester");
+                entity.HasOne<Subjects>(e => e.SubjectNavigation)
+                    .WithMany(e => e.Scores)
+                    .HasForeignKey(e => e.SubjectId)
+                    .HasConstraintName("fk_score_subject");
+                entity.HasOne<TestType>(e => e.TestTypeNavigation)
+                    .WithMany(e => e.Scores)
+                    .HasForeignKey(e => e.TestTypeId)
+                    .HasConstraintName("fk_score_testtype");
+                entity.HasOne<Students>(e => e.StudentNavigation)
+                   .WithMany(e => e.Scores)
+                   .HasForeignKey(e => e.StudentId)
+                   .OnDelete(DeleteBehavior.Cascade)
+                   .HasConstraintName("fk_score_student");
+
+            });
+
 
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
@@ -136,6 +181,12 @@ namespace StudentManagementAPI.Models
             modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserToken").HasKey(x => x.UserId);
+        }
+
+        private void ConstructSeedingData(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new SemeterSeeding());
+            modelBuilder.ApplyConfiguration(new TestTypeSeeding());
         }
     }
 }

@@ -124,11 +124,17 @@ namespace StudentManagementAPI
             services.AddTransient<NewsfeedService>(); 
             services.AddTransient<CommentService>(); 
             services.AddTransient<StudentService>(); 
+            services.AddTransient<ScoreService>(); 
+            services.AddTransient<TestTypeService>(); 
+            services.AddTransient<SemesterService>(); 
 
             //services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
             //services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
             //services.AddScoped<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<UserServices>();
+
+            // Auto Mapper Configurations
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

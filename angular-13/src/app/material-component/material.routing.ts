@@ -26,6 +26,7 @@ import { PostNewsFeedComponent } from "./Admin/post-newsfeed/post-newsfeed.compo
 import { ProfileComponent } from "../common/profile/profile.component";
 import { StudentComponent } from "./Admin/student/student.component";
 import { StudentListComponent } from "./Admin/student/student-list/student-list.component";
+import { ScoreComponent } from "./Admin/score-view/score-view.component";
 
 export const MaterialRoutes: Routes = [
   {
@@ -116,4 +117,5 @@ export const MaterialRoutes: Routes = [
   { path: "post-newsfeed", component: PostNewsFeedComponent },
   { path: "students", component: StudentComponent },
   { path: "students-list", component: StudentListComponent },
+  { path: "view-score", component: ScoreComponent },
 ];

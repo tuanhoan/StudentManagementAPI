@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentManagementAPI.Models;
 
 namespace StudentManagementAPI.Migrations
 {
     [DbContext(typeof(StudentManagementContext))]
-    partial class StudentManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20220508124336_seedingData")]
+    partial class seedingData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -148,7 +150,7 @@ namespace StudentManagementAPI.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "ddb335be-c85b-41fe-8f70-e05efecfc418",
+                            ConcurrencyStamp = "fd4b49f1-a828-49f7-8a63-0d87fd698d21",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -227,14 +229,14 @@ namespace StudentManagementAPI.Migrations
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
                             Birthday = new DateTime(2000, 4, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "d62a38b4-5e34-4228-849f-56841106e26f",
+                            ConcurrencyStamp = "b7345972-033b-417e-8d4e-6df81662088b",
                             Email = "tuanhoan@gmail.com",
                             EmailConfirmed = true,
                             FullName = "Tuấn Hoàn",
                             LockoutEnabled = false,
                             NormalizedEmail = "tuanhoan@gmail.com",
                             NormalizedUserName = "tuanhoan",
-                            PasswordHash = "AQAAAAEAACcQAAAAEId9YMBxODqXenpKJFIb8/we/wBqL5hSxTUZnchrprQxxrkC3CJ1u5aRONIj9kOuOg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEQrG5MCQqjVXBZKSN+QhE9oxndX35PdkLWbhOrb6O78d1LVOgVaTUvQQrQhHdmcfw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -356,7 +358,7 @@ namespace StudentManagementAPI.Migrations
 
                     b.HasIndex("TestTypeId");
 
-                    b.ToTable("Scores");
+                    b.ToTable("Score");
                 });
 
             modelBuilder.Entity("StudentManagementAPI.Models.Semester", b =>
@@ -378,7 +380,7 @@ namespace StudentManagementAPI.Migrations
                     b.HasKey("Id")
                         .HasName("pk_semester");
 
-                    b.ToTable("Semesters");
+                    b.ToTable("Semester");
 
                     b.HasData(
                         new
@@ -554,7 +556,7 @@ namespace StudentManagementAPI.Migrations
                     b.HasKey("Id")
                         .HasName("pk_testType");
 
-                    b.ToTable("TestTypes");
+                    b.ToTable("TestType");
 
                     b.HasData(
                         new
