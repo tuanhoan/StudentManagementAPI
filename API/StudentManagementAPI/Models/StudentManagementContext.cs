@@ -26,6 +26,8 @@ namespace StudentManagementAPI.Models
         public DbSet<Score> Scores { get; set; }
         public DbSet<TestType> TestTypes { get; set; }
         public DbSet<Semester> Semesters { get; set; }
+        public DbSet<Homework> Homeworks { get; set; }
+        public DbSet<Exercise> Exercises { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Seed();
@@ -109,7 +111,7 @@ namespace StudentManagementAPI.Models
                         .OnDelete(DeleteBehavior.NoAction)
                         .HasConstraintName("fk_Teams_Teachers");
 
-                
+
             }
           );
 
@@ -171,6 +173,44 @@ namespace StudentManagementAPI.Models
                    .HasConstraintName("fk_score_student");
 
             });
+
+            modelBuilder.Entity<Homework>(entity =>
+            {
+                entity.Property(e => e.Source)
+            .HasConversion(
+                v => string.Join(',', v),
+                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.CreateAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                entity.HasOne(c => c.UserNavigation)
+                 .WithMany(c => c.Homeworks)
+                 .HasForeignKey(e => e.UserId)
+                 .HasConstraintName("fk_homework_user");
+
+
+            });
+
+            modelBuilder.Entity<Exercise>(entity =>
+            {
+                entity.Property(e => e.Sources)
+            .HasConversion(
+                v => string.Join(',', v),
+                v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+
+                entity.HasKey(e => new { e.HomeworkId, e.UserId, e.CreatedAt });
+                entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                entity.HasOne(c => c.HomeworkNavigation)
+                   .WithMany(c => c.Exercises)
+                   .HasForeignKey(e => e.HomeworkId)
+                   .OnDelete(DeleteBehavior.NoAction)
+                   .HasConstraintName("fk_homework_execrise");
+                entity.HasOne(c => c.UserNavigation)
+                    .WithMany(c => c.Exercises)
+                    .HasForeignKey(e => e.UserId)
+                    .OnDelete(DeleteBehavior.NoAction)
+                    .HasConstraintName("fk_user_execrise");
+            });
+
 
 
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());

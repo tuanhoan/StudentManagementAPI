@@ -9,6 +9,7 @@ namespace StudentManagementAPI.Extensions
         public ApiMappingProfile()
         {
             CreateMap<ScoreDto, Score>();
+            CreateMap<HomeworkDto, Homework>();
             CreateMap<Score, ScoreViewDto>()
                 .ForMember(x=>x.SemesterName, act=>act.MapFrom(src=>src.SemesterNavigation.Name))
                 .ForMember(x => x.TestTypeName, act => act.MapFrom(src => src.TestTypeNavigation.TestName))

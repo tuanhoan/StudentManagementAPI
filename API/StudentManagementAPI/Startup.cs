@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using StudentManagementAPI.Extensions;
 using StudentManagementAPI.Models;
 using StudentManagementAPI.Services; 
 using System;
@@ -36,6 +37,7 @@ namespace StudentManagementAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
 
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSwaggerGen(c =>
@@ -127,6 +129,7 @@ namespace StudentManagementAPI
             services.AddTransient<ScoreService>(); 
             services.AddTransient<TestTypeService>(); 
             services.AddTransient<SemesterService>(); 
+            services.AddTransient<HomeworkService>();  
 
             //services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
             //services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();
@@ -140,6 +143,7 @@ namespace StudentManagementAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            SourcePath.Initialize(env);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

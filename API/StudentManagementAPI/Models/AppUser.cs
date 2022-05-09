@@ -9,6 +9,8 @@ namespace StudentManagementAPI.Models
         public AppUser()
         {
             Comments = new HashSet<Comment>();
+            Exercises = new HashSet<Exercise>();
+            Homeworks = new HashSet<Homework>();
         }
         public string FullName { get; set; }
         public DateTime? Birthday { get; set; }
@@ -18,6 +20,9 @@ namespace StudentManagementAPI.Models
         public string Address { get; set; }
         public string AvatarPath { get; set; }
 
-        public Students StudentNavigation { get; set; } 
+        public Students StudentNavigation { get; set; }
+
+        public ICollection<Exercise> Exercises { get; set; }
+        public ICollection<Homework> Homeworks { get; set; }
     }
 }
