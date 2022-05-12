@@ -47,6 +47,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { StudentComponent } from './Admin/student/student.component';
 import { StudentListComponent } from './Admin/student/student-list/student-list.component';
 import { ScoreComponent } from './Admin/score-view/score-view.component';
+import { HomeworkComponent } from './Admin/homework/homework.component';
 
 @NgModule({
   imports: [
@@ -94,7 +95,8 @@ import { ScoreComponent } from './Admin/score-view/score-view.component';
     PostNewsFeedComponent,
     StudentComponent,
     StudentListComponent,
-    ScoreComponent
+    ScoreComponent,
+    HomeworkComponent
   ]
 })
 

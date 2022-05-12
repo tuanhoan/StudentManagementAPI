@@ -15,6 +15,7 @@ const MENUITEMS = [
   { state: 'post-newsfeed', name: 'Newsfeed', type: 'link', icon: 'av_timer' },
   { state: 'students-list', name: 'Students', type: 'link', icon: 'av_timer' },
   { state: 'view-score', name: 'Score', type: 'link', icon: 'av_timer' },
+  { state: 'homework', name: 'Homework', type: 'link', icon: 'av_timer' },
   { state: 'button', type: 'link', name: 'Buttons', icon: 'crop_7_5' },
   { state: 'grid', type: 'link', name: 'Grid List', icon: 'view_comfy' },
   { state: 'lists', type: 'link', name: 'Lists', icon: 'view_list' },

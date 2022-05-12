@@ -27,6 +27,7 @@ import { ProfileComponent } from "../common/profile/profile.component";
 import { StudentComponent } from "./Admin/student/student.component";
 import { StudentListComponent } from "./Admin/student/student-list/student-list.component";
 import { ScoreComponent } from "./Admin/score-view/score-view.component";
+import { HomeworkComponent } from "./Admin/homework/homework.component";
 
 export const MaterialRoutes: Routes = [
   {
@@ -118,4 +119,5 @@ export const MaterialRoutes: Routes = [
   { path: "students", component: StudentComponent },
   { path: "students-list", component: StudentListComponent },
   { path: "view-score", component: ScoreComponent },
+  { path: "homework", component: HomeworkComponent, canActivate: [AuthGuard], },
 ];
