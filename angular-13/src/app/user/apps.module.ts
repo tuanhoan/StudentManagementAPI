@@ -50,5 +50,6 @@ import { MatTableModule } from '@angular/material/table';
     MatTableModule
   ],
   providers: [ServiceblogService],
+  exports: [CommentComponent],
 })
 export class AppsModule {}

@@ -1,13 +1,6 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpEventType,
-  HttpHeaders,
-} from "@angular/common/http";
+
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
-import { Router } from "@angular/router";
-import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { ActivatedRoute } from "@angular/router";
 import { HttpServerService } from "src/app/Services/http-server.service";
 
 @Component({
@@ -17,9 +10,14 @@ import { HttpServerService } from "src/app/Services/http-server.service";
 })
 export class HomeworkListComponent implements OnInit {
   homeworks: any;
-  constructor(private httpService: HttpServerService) {}
+  id:any;
+  isAdd:boolean=false;
+  constructor(private httpService: HttpServerService,
+    activatedRouter: ActivatedRoute) {
+      this.id = activatedRouter.snapshot.paramMap.get("id");
+    }
   ngOnInit(): void {
-    this.httpService.Get("Homeworks/teamId/31").subscribe((data) => {
+    this.httpService.Get("Homeworks/teamId/"+this.id).subscribe((data) => {
       console.log(data);
       this.homeworks = data;
     });

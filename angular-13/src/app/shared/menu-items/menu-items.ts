@@ -16,7 +16,6 @@ const MENUITEMS = [
   { state: 'students-list', name: 'Students', type: 'link', icon: 'av_timer' },
   { state: 'view-score', name: 'Score', type: 'link', icon: 'av_timer' },
   { state: 'homework-list', name: 'Homework', type: 'link', icon: 'av_timer' },
-  { state: 'exercise-list', name: 'Exercise', type: 'link', icon: 'av_timer' },
 ];
 
 @Injectable()

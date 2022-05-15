@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
+    <div class="col" *ngFor="let data of teams">
+      <div class="card radius-15">
+        <div class="card-body text-center">
+          <div class="p-4 border radius-15">
+            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" width="110" height="110" class="rounded-circle shadow" alt="">
+            <h5 class="mb-0 mt-5">{{data.name}}</h5>
+            <p class="mb-3">Class</p>
+            <div class="d-grid"> <a [routerLink]="['/homework-list/'+data.id]" class="btn btn-outline-primary radius-15">Truy cập</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  <!-- <mat-grid-list cols="4" rowHeight="4:3">
+    <div *ngFor="let data of teams">
+      <mat-grid-tile>
+        <div class="category m-2" >
+          <div class="job">
+            <span class="colors1 mb-4">{{data?.name}}</span>
+            <h5><a [routerLink]="['/homework/'+data.id]" >
+              <div [innerHTML]="data?.content.substring(0, 220)"></div>
+            </a></h5>
+
+            <!-- <div class="d-flex align-items-center justify-content-between">
+              <div class="left">
+                <p>{{data.userNavigation.fullName}}</p>
+              </div>
+              <span class="time">{{data.createAt|date:"medium"}}</span>
+            </div> -->
+          <!-- </div>
+        </div></mat-grid-tile
+      >
+    </div>
+  </mat-grid-list> --> -->
+</div>

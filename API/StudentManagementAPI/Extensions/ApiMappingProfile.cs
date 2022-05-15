@@ -12,7 +12,7 @@ namespace StudentManagementAPI.Extensions
         {
             CreateMap<ScoreDto, Score>();
             CreateMap<HomeworkDto, Homework>();
-            CreateMap<ExerciseDto, Exercise>();
+            CreateMap<ExerciseCreateDto, Exercise>();
             CreateMap<Score, ScoreViewDto>()
                 .ForMember(x=>x.SemesterName, act=>act.MapFrom(src=>src.SemesterNavigation.Name))
                 .ForMember(x => x.TestTypeName, act => act.MapFrom(src => src.TestTypeNavigation.TestName))
@@ -23,6 +23,10 @@ namespace StudentManagementAPI.Extensions
             CreateMap<Homework, HomeworkDetailDto>()
                 .ForMember(x => x.UserFullName, act => act.MapFrom(src => src.UserNavigation.FullName))
                 .ForMember(x => x.Sources, act => act.MapFrom(src => src.Source.ToList()));
+
+            CreateMap<Exercise, ExerciseDto>()
+                .ForMember(x => x.UserName, act => act.MapFrom(src => src.UserNavigation.FullName))
+                .ForMember(x => x.Sources, act => act.MapFrom(src => src.Sources.ToList()));
 
         }
     }

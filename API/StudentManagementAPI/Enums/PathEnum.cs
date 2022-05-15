@@ -5,6 +5,7 @@
         Homework,
         Exercise,
         Newsfeed,
-        Comment
+        Comment,
+        Avatar
     }
 }

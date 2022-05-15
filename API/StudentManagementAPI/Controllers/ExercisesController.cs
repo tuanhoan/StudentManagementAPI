@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudentManagementAPI.Dto;
+using StudentManagementAPI.Enums;
 using StudentManagementAPI.Models;
 using StudentManagementAPI.Services;
 using System.Collections.Generic;
@@ -13,21 +15,36 @@ namespace StudentManagementAPI.Controllers
     public class ExercisesController : ControllerBase
     {
         private readonly ExerciseService _exerciseService;
-        public ExercisesController(ExerciseService exerciseService)
+        private readonly IMapper _mapper;
+        public ExercisesController(ExerciseService exerciseService,
+            IMapper mapper)
         {
             _exerciseService = exerciseService;
+            _mapper = mapper;
         }
 
         [HttpGet("{homeworkId:int}")]
-        public async Task<List<Exercise>> GetByHomeworkId(int homeworkId)
+        public async Task<List<ExerciseDto>> GetByHomeworkId(int homeworkId)
         {
-            return await _exerciseService.GetExerciseByHomeworkId(homeworkId);
+            var result = await _exerciseService.GetExerciseByHomeworkId(homeworkId);
+            var rs = _mapper.Map<List<ExerciseDto>>(result);
+            foreach(var item in rs)
+            {
+                if (item != null && item.Sources != null)
+                {
+                    for (int i = 0; i < item.Sources.Count; i++)
+                    {
+                        item.Sources[i] = $"assets\\uploads\\{PathEnum.Homework}\\{item.HomeworkId}\\" + item.Sources[i];
+                    }
+                }
+            }
+            return rs;
         }
 
         [HttpPost]
-        public async Task AddExercise([FromForm]ExerciseDto exercise, IFormFileCollection formFiles)
+        public async Task AddExercise([FromForm] ExerciseCreateDto exercise, IFormFileCollection formFiles)
         {
             await _exerciseService.AddExercise(exercise, formFiles);
-        }    
+        }
     }
 }

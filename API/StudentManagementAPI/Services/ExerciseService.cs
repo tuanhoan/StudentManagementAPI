@@ -32,7 +32,7 @@ namespace StudentManagementAPI.Services
                 .ToListAsync();
         }
 
-        public async Task AddExercise(ExerciseDto exerciseDto, IFormFileCollection formFiles)
+        public async Task AddExercise(ExerciseCreateDto exerciseDto, IFormFileCollection formFiles)
         {
             var entity = _mapper.Map<Exercise>(exerciseDto);
             var result = _context.Exercises.Add(entity);

@@ -1,4 +1,8 @@
-<div class="container">
+<button (click)="isAdd=!isAdd">{{isAdd?"Quay lại":"Thêm bài tập"}}</button>
+
+<app-homework *ngIf="isAdd"></app-homework>
+
+<div class="container" *ngIf="!isAdd">
   <mat-grid-list cols="4" rowHeight="4:3">
     <div *ngFor="let data of homeworks">
       <mat-grid-tile>
@@ -6,7 +10,7 @@
           <div class="job">
             <span class="colors1 mb-4">{{data.title}}</span>
             <h5><a [routerLink]="['/homework/'+data.id]" >
-              <div [innerHTML]="data?.content.substring(0, 220)"></div>
+              <div [innerHTML]="data?.content.substring(0, 20) +'...'"></div>
             </a></h5>
 
             <div class="d-flex align-items-center justify-content-between">

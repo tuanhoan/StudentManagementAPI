@@ -73,7 +73,7 @@ export class HomeworkComponent implements OnInit {
     formData.append("title", this.model.title);
     formData.append("content", this.model.content);
     formData.append("userId", localStorage.getItem("userId")!);
-    formData.append("teamId", "31");
+    formData.append("teamId", this.id);
 
     this.service
       .Post("Homeworks", formData, {

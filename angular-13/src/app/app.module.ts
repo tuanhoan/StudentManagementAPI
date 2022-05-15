@@ -27,6 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormatContentPipe } from './Pipe/format-content.pipe';
 import { ProfileComponent } from './common/profile/profile.component';
 import { ExampleComponent } from './example/example.component';
+import { CommentComponent } from './User/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ExampleComponent } from './example/example.component';
     },
     AuthGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule {}

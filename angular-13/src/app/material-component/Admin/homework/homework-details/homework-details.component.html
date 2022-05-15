@@ -1,29 +1,21 @@
-Details
-<!-- <img [src]="homeworks.sources[0]" alt="wrapkit" /> -->
-
-<div class="container">
-  <div class="card m-b-30">
-
-    <div class="card-body">
-      <div class="product-file-type">
-        <ul class="list-unstyled" *ngFor="let data of homeworks.sources">
-          <li class="media mb-3">
-            <span
-              class="mr-3 align-self-center img-icon primary-rgba text-primary"
-              >{{data.split("\\").at(-1)}}</span
-            >
-            <div class="media-body">
-              <h5 class="font-16 mb-1">
-                Marketing Guidelines<i
-                  class="feather icon-download-cloud float-right"
-                ></i>
-              </h5>
-              <p>.doc, 5.3 MB</p>
-            </div>
-          </li>
-
-        </ul>
+<div class="container bootdey ml-5">
+  <div class="mini-spacer">
+    <div
+      class="d-flex align-items-center text-uppercase m-t-40 font-13 font-medium"
+    >
+      <a routerLink="" class="link">John Deo</a>
+      <div class="ml-auto">
+        <a routerLink="" class="link">{{ homeworks?.createAt }} </a>
       </div>
     </div>
+    <h2 class="title font-light">
+      {{ homeworks?.title }}
+    </h2>
+    <p class="content" [innerHTML]="homeworks?.content"></p>
+    <mat-list-item *ngFor="let file of homeworks?.sources">
+      <a href="{{ file }}">{{ file.split("\\").at(-1) }}</a>
+    </mat-list-item>
   </div>
 </div>
+
+<app-exercise [Id]="id"></app-exercise>

@@ -11,9 +11,9 @@ import { StudentComponent } from "./Admin/student/student.component";
 import { StudentListComponent } from "./Admin/student/student-list/student-list.component";
 import { HomeworkComponent } from "./Admin/homework/homework.component";
 import { ScoreComponent } from "./Admin/score-view/score-view.component";
-import { ExerciseListComponent } from "./Admin/exercise/exercise-list.component";
 import { HomeworkListComponent } from "./Admin/homework/homework-list/homework-list.component";
 import { HomeworkDetailComponent } from "./Admin/homework/homework-details/homework-details.component";
+import { TeamListComponent } from "./Admin/homework/team-list/team-list.component";
 
 export const MaterialRoutes: Routes = [
   {
@@ -42,7 +42,7 @@ export const MaterialRoutes: Routes = [
   { path: "students-list", component: StudentListComponent },
   { path: "view-score", component: ScoreComponent },
   { path: "homework/:id", component: HomeworkDetailComponent, canActivate: [AuthGuard], },
-  { path: "add-homework", component: HomeworkComponent, canActivate: [AuthGuard], },
-  { path: 'homework-list', component: HomeworkListComponent },
-  { path: "exercise-list", component: ExerciseListComponent, canActivate: [AuthGuard], },
+  { path: "add-homework/:id", component: HomeworkComponent, canActivate: [AuthGuard], },
+  { path: 'homework-list/:id', component: HomeworkListComponent },
+  { path: 'homework-list', component: TeamListComponent },
 ];
