@@ -186,6 +186,10 @@ namespace StudentManagementAPI.Models
                  .WithMany(c => c.Homeworks)
                  .HasForeignKey(e => e.UserId)
                  .HasConstraintName("fk_homework_user");
+                entity.HasOne(c => c.TeamNavigation)
+                 .WithMany(c => c.Homeworks)
+                 .HasForeignKey(e => e.TeamId)
+                 .HasConstraintName("fk_homework_team");
 
 
             });

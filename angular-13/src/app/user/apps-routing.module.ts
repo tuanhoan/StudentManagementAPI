@@ -7,6 +7,8 @@ import { AboutComponent } from './about/about.component';
 
 import { FullComponent } from './layout/full/full.component';
 import { NewsfeedDetailComponent } from './blog/newsfeed-detail/newsfeed-detail.component';
+import { ScoreComponent } from '../material-component/Admin/score-view/score-view.component';
+import { UserScoreComponent } from './user-score/user-score.component';
 
 
 const routes: Routes = [
@@ -17,6 +19,8 @@ const routes: Routes = [
       { path: '', component: NewsfeedComponent },
       { path: 'blogDetail/:id', component: NewsfeedDetailComponent },
       { path: 'about', component: AboutComponent },
+      { path: 'score', component: UserScoreComponent },
+
     ]
   }
 ];

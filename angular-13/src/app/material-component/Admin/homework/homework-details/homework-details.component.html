@@ -1,0 +1,29 @@
+Details
+<!-- <img [src]="homeworks.sources[0]" alt="wrapkit" /> -->
+
+<div class="container">
+  <div class="card m-b-30">
+
+    <div class="card-body">
+      <div class="product-file-type">
+        <ul class="list-unstyled" *ngFor="let data of homeworks.sources">
+          <li class="media mb-3">
+            <span
+              class="mr-3 align-self-center img-icon primary-rgba text-primary"
+              >{{data.split("\\").at(-1)}}</span
+            >
+            <div class="media-body">
+              <h5 class="font-16 mb-1">
+                Marketing Guidelines<i
+                  class="feather icon-download-cloud float-right"
+                ></i>
+              </h5>
+              <p>.doc, 5.3 MB</p>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

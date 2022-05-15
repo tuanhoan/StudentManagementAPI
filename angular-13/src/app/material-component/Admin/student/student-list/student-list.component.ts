@@ -2,9 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
-import { ActivatedRoute } from "@angular/router";
-import { Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";
+import { Router } from "@angular/router";
 import { HttpServerService } from "src/app/Services/http-server.service";
 
 @Component({
@@ -13,10 +11,11 @@ import { HttpServerService } from "src/app/Services/http-server.service";
   styleUrls: ["./student-list.component.scss"],
 })
 export class StudentListComponent implements OnInit, AfterViewInit {
-  constructor(public httpService: HttpServerService) {}
+  constructor(public httpService: HttpServerService, private router: Router) {}
   students: Student[] = [];
 
   ngOnInit(): void {
+    console.log(localStorage);
     this.httpService.Get("Students").subscribe((data: any) => {
       data.forEach((item: any) => {
         let std = new Student();
@@ -25,11 +24,11 @@ export class StudentListComponent implements OnInit, AfterViewInit {
         std.birthday = item.appUser.birthday;
         std.phoneNumber = item.appUser.phoneNumber;
         std.team = item.teamNavigation?.name;
+        std.userName = item.appUser.userName;
         this.students.push(std);
       });
       this.dataSource = new MatTableDataSource<Student>(this.students);
       this.dataSource.paginator = this.paginator;
-
     });
   }
   displayedColumns: string[] = [
@@ -37,6 +36,7 @@ export class StudentListComponent implements OnInit, AfterViewInit {
     "Email",
     "Birthday",
     "PhoneNumber",
+    "User",
     "Team",
   ];
   dataSource: any = new MatTableDataSource<Student>(this.students);
@@ -44,12 +44,13 @@ export class StudentListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit() {
-    console.log(this.dataSource);
     this.dataSource.paginator = this.paginator;
   }
 
+  AddStudent() {
+    this.router.navigate(["students"]);
+  }
 }
-
 
 export class Student {
   fullName: string = "";
@@ -57,4 +58,5 @@ export class Student {
   birthday: Date = new Date();
   phoneNumber: string = "";
   team: string = "";
+  userName = "";
 }

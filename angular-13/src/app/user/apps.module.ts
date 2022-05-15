@@ -21,6 +21,8 @@ import { BannerComponent } from './shared/banner/banner.component';
 import { BannerNavigationComponent } from './shared/banner-navigation/banner-navigation.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { CommentComponent } from './comment/comment.component';
+import { UserScoreComponent } from './user-score/user-score.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { CommentComponent } from './comment/comment.component';
     // BannerContentComponent,
     BannerNavigationComponent,
     FooterComponent,
-    CommentComponent
+    CommentComponent,
+    UserScoreComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +47,7 @@ import { CommentComponent } from './comment/comment.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatTableModule
   ],
   providers: [ServiceblogService],
 })

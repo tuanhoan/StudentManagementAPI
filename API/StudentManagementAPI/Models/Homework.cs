@@ -16,6 +16,8 @@ namespace StudentManagementAPI.Models
         public Guid UserId { get; set; }
         public DateTime CreateAt { get; set; }
         public AppUser UserNavigation { get; set; }
+        public int TeamId { get; set; }
+        public Teams TeamNavigation { get; set; }
         public ICollection<Exercise> Exercises { get; set; }
     }
 }

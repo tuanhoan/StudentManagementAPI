@@ -129,7 +129,8 @@ namespace StudentManagementAPI
             services.AddTransient<ScoreService>(); 
             services.AddTransient<TestTypeService>(); 
             services.AddTransient<SemesterService>(); 
-            services.AddTransient<HomeworkService>();  
+            services.AddTransient<HomeworkService>();
+            services.AddTransient<ExerciseService>();
 
             //services.AddScoped<UserManager<AppUser>, UserManager<AppUser>>();
             //services.AddScoped<SignInManager<AppUser>, SignInManager<AppUser>>();

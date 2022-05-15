@@ -31,7 +31,7 @@ namespace StudentManagementAPI.Services
                 FullName = studentDto.FullName,
                 Birthday = studentDto.Birthday
             };
-            var result = await _userManager.CreateAsync(user, TeacherServices.RemoveUnicode(studentDto.FullName).ToLower() + "LTT@2022");
+            var result = await _userManager.CreateAsync(user, temp + "LTT@2022");
             if (!result.Succeeded)
             {
                 throw new Exception(result.Errors.FirstOrDefault().Description);
@@ -56,6 +56,14 @@ namespace StudentManagementAPI.Services
                 .Include(x => x.AppUser)
                 .Include(x=>x.TeamNavigation)
                 .AsNoTracking().ToListAsync();
+        }
+
+        public async Task<Students> GetCurrentUser(Guid userId)
+        {
+            return await _context.Students
+                .Where(x=>x.AppUserId == userId) 
+                .Include(x => x.TeamNavigation)
+                .AsNoTracking().FirstOrDefaultAsync();
         }
     }
 }

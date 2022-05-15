@@ -11,26 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialRoutes } from './material.routing';
-import { ButtonsComponent } from './buttons/buttons.component';
 
-import { GridComponent } from './grid/grid.component';
-import { ListsComponent } from './lists/lists.component';
-import { MenuComponent } from './menu/menu.component';
-import { TabsComponent } from './tabs/tabs.component';
-import { StepperComponent } from './stepper/stepper.component';
-import { ExpansionComponent } from './expansion/expansion.component';
-import { ChipsComponent } from './chips/chips.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { ProgressSnipperComponent } from './progress-snipper/progress-snipper.component';
-import { ProgressComponent } from './progress/progress.component';
-import {
-  DialogComponent,
-  DialogOverviewExampleDialogComponent
-} from './dialog/dialog.component';
-import { TooltipComponent } from './tooltip/tooltip.component';
-import { SnackbarComponent } from './snackbar/snackbar.component';
-import { SliderComponent } from './slider/slider.component';
-import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { HomeComponent } from './home/home.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatDividerModule } from '@angular/material/divider';
@@ -46,8 +27,11 @@ import { PostNewsFeedComponent } from './Admin/post-newsfeed/post-newsfeed.compo
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { StudentComponent } from './Admin/student/student.component';
 import { StudentListComponent } from './Admin/student/student-list/student-list.component';
-import { ScoreComponent } from './Admin/score-view/score-view.component';
 import { HomeworkComponent } from './Admin/homework/homework.component';
+import { ScoreComponent } from './Admin/score-view/score-view.component';
+import { ExerciseListComponent } from './Admin/exercise/exercise-list.component';
+import { HomeworkListComponent } from './Admin/homework/homework-list/homework-list.component';
+import { HomeworkDetailComponent } from './Admin/homework/homework-details/homework-details.component';
 
 @NgModule({
   imports: [
@@ -66,25 +50,8 @@ import { HomeworkComponent } from './Admin/homework/homework.component';
     CKEditorModule
   ],
   providers: [],
-  entryComponents: [DialogOverviewExampleDialogComponent],
+  entryComponents: [],
   declarations: [
-    ButtonsComponent,
-    GridComponent,
-    ListsComponent,
-    MenuComponent,
-    TabsComponent,
-    StepperComponent,
-    ExpansionComponent,
-    ChipsComponent,
-    ToolbarComponent,
-    ProgressSnipperComponent,
-    ProgressComponent,
-    DialogComponent,
-    DialogOverviewExampleDialogComponent,
-    TooltipComponent,
-    SnackbarComponent,
-    SliderComponent,
-    SlideToggleComponent,
     HomeComponent,
     TeacherListComponent,
     TeacherDetailsComponent,
@@ -96,7 +63,10 @@ import { HomeworkComponent } from './Admin/homework/homework.component';
     StudentComponent,
     StudentListComponent,
     ScoreComponent,
-    HomeworkComponent
+    HomeworkComponent,
+    HomeworkListComponent,
+    ExerciseListComponent,
+    HomeworkDetailComponent
   ]
 })
 

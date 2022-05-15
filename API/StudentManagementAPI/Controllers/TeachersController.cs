@@ -23,5 +23,11 @@ namespace StudentManagementAPI.Controllers
         {
             return await _teacherServices.GetAllAsync();
         }
+
+        [HttpGet("get-teams")]
+        public async Task<List<Teams>> GetTeams(int teacherId)
+        {
+            return await _teacherServices.GetTeams(teacherId);
+        }
     }
 }

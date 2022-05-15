@@ -53,12 +53,26 @@ namespace StudentManagementAPI.Services
             return await _context.Homeworks.OrderByDescending(x => x.CreateAt).ToListAsync();
         }
 
-        public async Task<NewsFeed> GetNewsFeedById(int id)
+
+        public async Task<List<Homework>> GetByTeamId(int teamId)
         {
-            var roothPath = "assets\\Upload\\Newsfeed\\" + id;
-            var result = await _context.NewsFeeds.FirstOrDefaultAsync(x => x.Id == id);
-            result.Image = roothPath + "\\" + result.Image;
-            return result;
+            var rs = await _context.Homeworks
+                .Where(x => x.TeamId == teamId)
+                .Include(x => x.UserNavigation)
+                .AsNoTracking()
+                .OrderByDescending(x => x.CreateAt).ToListAsync();
+
+            return rs;
+        }
+
+        public async Task<Homework> GetById(int id)
+        {
+            return await _context.Homeworks
+               .Where(x => x.Id == id)
+               .Include(x => x.UserNavigation)
+               .AsNoTracking()
+               .FirstOrDefaultAsync();
+
         }
     }
 }

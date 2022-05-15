@@ -26,6 +26,7 @@ import { RegisterPageComponent } from './Login/register-page/register-page.compo
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormatContentPipe } from './Pipe/format-content.pipe';
 import { ProfileComponent } from './common/profile/profile.component';
+import { ExampleComponent } from './example/example.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ProfileComponent } from './common/profile/profile.component';
     LoginPageComponent,
     RegisterPageComponent,
     FormatContentPipe,
-    ProfileComponent
+    ProfileComponent,
+    ExampleComponent
   ],
   imports: [
     BrowserModule,

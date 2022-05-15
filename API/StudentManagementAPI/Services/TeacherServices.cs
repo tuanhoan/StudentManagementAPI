@@ -4,6 +4,7 @@ using StudentManagementAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -54,7 +55,19 @@ namespace StudentManagementAPI.Services
                 .Include(x=>x.SubjectNavigation)
                 .AsNoTracking()
                 .ToListAsync();
-        } 
+        }
+
+        public async Task<List<Teams>> GetTeams(int teacherId)
+        {
+
+            var result =  await _context.MapTeacherSubjectTeams
+                .Where(x=>x.TeacherId == teacherId)
+                .Include(x => x.TeamNavigation) 
+                .AsNoTracking()
+                .ToListAsync();
+            return result.GroupBy(x=>x.TeamNavigation.Name).Select(x=>x.First().TeamNavigation)
+                .OrderBy(x=>x.Name).ToList();
+        }
 
         public static string RemoveUnicode(string text)
         {

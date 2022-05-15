@@ -14,6 +14,7 @@ namespace StudentManagementAPI.Models
             //Teachers = new HashSet<Teachers>();
             MapTeacherSubjectTeams = new HashSet<MapTeacherSubjectTeam>();
             Students = new HashSet<Students>();
+            Homeworks = new HashSet<Homework>();
         }
         public int Id { get; set; }
         public string Name { get; set; }   
@@ -24,5 +25,6 @@ namespace StudentManagementAPI.Models
         //public virtual ICollection<Teachers> Teachers { get; set; }
         public virtual ICollection<MapTeacherSubjectTeam> MapTeacherSubjectTeams { get; set; }
         public virtual ICollection<Students> Students { get; set; }
+        public virtual ICollection<Homework> Homeworks { get; set; }
     }
 }

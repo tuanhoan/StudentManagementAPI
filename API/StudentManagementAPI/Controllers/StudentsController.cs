@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using StudentManagementAPI.Dto;
 using StudentManagementAPI.Models;
 using StudentManagementAPI.Services;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -29,6 +30,12 @@ namespace StudentManagementAPI.Controllers
         public async Task<List<Students>> GetAll()
         {
             return await _studentService.GetAllAsync();
+        }
+
+        [HttpGet("current-student")]
+        public async Task<Students> GetCurrentStudent(Guid userId)
+        {
+            return await _studentService.GetCurrentUser(userId);
         }
     }
 }

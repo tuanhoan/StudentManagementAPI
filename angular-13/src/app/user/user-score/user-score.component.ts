@@ -1,13 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { HttpServerService } from "src/app/Services/http-server.service";
-import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { ServiceblogService } from "../blog/blog-service.service";
 
 @Component({
-  selector: "app-score-view",
-  templateUrl: "./score-view.component.html",
-  styleUrls: ["./score-view.component.scss"],
+  selector: "app-user-score",
+  templateUrl: "./user-score.component.html",
+  styleUrls: ["./user-score.component.css"],
 })
-export class ScoreComponent implements OnInit {
+export class UserScoreComponent implements OnInit {
   displayedColumns: string[] = ["subject", "15P", "60P", "HK", "TB"];
   dataSource: any;
   scores: Score[] = [];

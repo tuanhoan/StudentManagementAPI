@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudentManagementAPI.Dto;
+using StudentManagementAPI.Enums;
+using StudentManagementAPI.Extensions;
 using StudentManagementAPI.Models;
 using StudentManagementAPI.Services;
 using System.Collections.Generic;
@@ -13,13 +16,16 @@ namespace StudentManagementAPI.Controllers
     public class HomeworksController : ControllerBase
     {
         private readonly HomeworkService _homeworkService;
-        public HomeworksController(HomeworkService homeworkService)
+        private readonly IMapper _mapper;
+        public HomeworksController(HomeworkService homeworkService,
+            IMapper mapper)
         {
             _homeworkService = homeworkService;
+            _mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateNewsFeed([FromForm] HomeworkDto homework,  IFormFileCollection formFiles)
+        public async Task<IActionResult> CreateNewsFeed([FromForm] HomeworkDto homework, IFormFileCollection formFiles)
         {
             await _homeworkService.AddHomework(homework, formFiles);
             return Ok();
@@ -30,10 +36,27 @@ namespace StudentManagementAPI.Controllers
         {
             return await _homeworkService.GetAllAsync();
         }
-        //[HttpGet("{Id:int}")]
-        //public async Task<NewsFeed> GetById(int Id)
-        //{
-        //    return await _newsfeedService.GetNewsFeedById(Id);
-        //}
+        [HttpGet("teamId/{teamId:int}")]
+        public async Task<List<Homework>> GetByTeamId(int teamId)
+        {
+            return await _homeworkService.GetByTeamId(teamId);
+        }
+        [HttpGet("{id:int}")]
+        public async Task<HomeworkDetailDto> GetById(int id)
+        {
+            var result = await _homeworkService.GetById(id);
+            var rs = _mapper.Map<HomeworkDetailDto>(result);
+            if (rs!=null && rs.Sources != null)
+            {
+                for (int i = 0; i< rs.Sources.Count; i++)
+                {
+                   rs.Sources[i] = $"assets\\uploads\\{PathEnum.Homework}\\{result.Id}\\" + rs.Sources[i];
+                }
+            }
+            
+            return rs;
+
+            //.ForEach(item => item = $"{SourcePath.Path}/{PathEnum.Homework}/{src.Id}")
+        }
     }
 }
