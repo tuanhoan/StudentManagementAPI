@@ -1,10 +1,16 @@
-<div class="row d-flex justify-content-center align-items-center h-100">
+<div class="px-2 py-2">
+  <button type="submit" (click)="isBulkUpload=!isBulkUpload" class="btn btn-primary">Bulk Upload</button>
+</div>
+
+<div *ngIf="isBulkUpload">
+  <app-bulk-upload></app-bulk-upload>
+</div>
+
+<div class="row d-flex justify-content-center align-items-center h-100" *ngIf="!isBulkUpload">
   <div class="col-xl-9">
     <div class="card" style="border-radius: 15px">
       <div class="card-body">
-        <div class="px-2 py-2">
-          <button type="submit" class="btn btn-primary">Bulk Upload</button>
-        </div>
+
 
         <div class="row align-items-center pt-4 pb-3">
           <div class="col-md-3 ps-5">
@@ -85,22 +91,6 @@
 
         <hr class="mx-n3" />
 
-        <!-- <div class="row align-items-center py-3">
-          <div class="col-md-3 ps-5">
-            <h6 class="mb-0">Upload CV</h6>
-          </div>
-          <div class="col-md-9 pe-5">
-            <input
-              class="form-control form-control-lg"
-              id="formFileLg"
-              type="file"
-            />
-            <div class="small text-muted mt-2">
-              Upload your CV/Resume or any other relevant file. Max file size 50
-              MB
-            </div>
-          </div>
-        </div> -->
 
         <hr class="mx-n3" />
 

@@ -36,6 +36,7 @@ import { AppsModule } from "../User/apps.module";
 import { ExerciseComponent } from "./Admin/homework/exercise/exercise.component";
 import { TeamListComponent } from "./Admin/homework/team-list/team-list.component";
 import { MatGridListModule } from "@angular/material/grid-list";
+import { BulkUploadComponent } from "./Admin/student/bulk-upload/bulk-upload.component";
 
 @NgModule({
   imports: [
@@ -73,7 +74,8 @@ import { MatGridListModule } from "@angular/material/grid-list";
     HomeworkListComponent,
     ExerciseComponent,
     HomeworkDetailComponent,
-    TeamListComponent
+    TeamListComponent,
+    BulkUploadComponent
   ]
 })
 export class MaterialComponentsModule {}

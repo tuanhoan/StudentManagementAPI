@@ -1,0 +1,59 @@
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col-xl-9">
+    <div class="card" style="border-radius: 15px">
+      <div class="card-body">
+        <div class="row align-items-center pt-4 pb-3">
+          <div class="col-md-3 ps-5">
+            <h6 class="mb-0">Lớp</h6>
+          </div>
+          <div class="col-md-9 pe-5">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Chọn lớp</mat-label>
+              <input
+                type="text"
+                matInput
+                [formControl]="myControl"
+                [matAutocomplete]="auto"
+              />
+              <mat-autocomplete
+                #auto="matAutocomplete"
+                [displayWith]="displayFn"
+                (optionSelected)="onSelectionChange($event)"
+              >
+                <mat-option
+                  *ngFor="let option of filteredOptions | async"
+                  [value]="option"
+                >
+                  {{ option.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-3 ps-5">
+            <h6 class="mb-0">File</h6>
+          </div>
+          <div class="col-md-9 pe-5">
+            <input
+              (change)="onFileSelected($event)"
+              type="file"
+              id="myFile"
+              name="filename"
+            />
+            <div class="file-upload">
+              {{ fileName || "No file uploaded yet." }}
+            </div>
+          </div>
+
+          <hr class="mx-n3" />
+
+          <div class="px-5 py-4">
+            <button type="submit" (click)="Submit()" class="btn btn-primary">
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

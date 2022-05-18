@@ -13,6 +13,7 @@ import { HttpServerService } from "src/app/Services/http-server.service";
 export class StudentComponent implements OnInit {
   constructor(public httpService: HttpServerService) {}
 
+  isBulkUpload = false;
   myControl = new FormControl();
   options: any;
   filteredOptions!: Observable<string[]>;

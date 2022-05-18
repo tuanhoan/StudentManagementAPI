@@ -19,6 +19,7 @@ namespace StudentManagementAPI.Models
 
         public string Address { get; set; }
         public string AvatarPath { get; set; }
+        public string Sex { get; set; }
 
         public Students StudentNavigation { get; set; }
 

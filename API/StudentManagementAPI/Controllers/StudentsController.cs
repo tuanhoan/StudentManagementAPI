@@ -37,5 +37,11 @@ namespace StudentManagementAPI.Controllers
         {
             return await _studentService.GetCurrentUser(userId);
         }
+
+        [HttpPost("upload-file")]
+        public async Task UploadFile(IFormFile file, int TeamId)
+        {
+            await _studentService.UploadFile(file, TeamId);
+        }
     }
 }

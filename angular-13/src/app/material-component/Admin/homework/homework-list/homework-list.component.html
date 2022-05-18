@@ -10,7 +10,7 @@
           <div class="job">
             <span class="colors1 mb-4">{{data.title}}</span>
             <h5><a [routerLink]="['/homework/'+data.id]" >
-              <div [innerHTML]="data?.content.substring(0, 20) +'...'"></div>
+              <div [innerHTML]="data?.content.substring(0, 15) +'...'"></div>
             </a></h5>
 
             <div class="d-flex align-items-center justify-content-between">

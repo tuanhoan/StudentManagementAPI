@@ -8,7 +8,7 @@ import { HttpServerService } from './Services/http-server.service';
 })
 export class AppComponent {
   constructor(private httpService:HttpServerService){
-    httpService.Get('/api/ThoiKhoaBieu').subscribe(data=>{
+    httpService.Get('ThoiKhoaBieu').subscribe(data=>{
 
     });
   }
