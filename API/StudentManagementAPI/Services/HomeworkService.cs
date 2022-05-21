@@ -41,11 +41,10 @@ namespace StudentManagementAPI.Services
                 sources.Add(source);
             }
 
-            var x = PathEnum.Homework.ToString();
             result.Entity.Source = sources.ToArray();
 
             await _context.SaveChangesAsync();
-            await SourcePath.SaveFileAsync(formFiles, PathEnum.Homework.ToString(), result.Entity.Id);
+            await SourcePath.SaveFileAsync(formFiles, PathEnum.Homework.ToString(), result.Entity.Id.ToString());
         }
 
         public async Task<List<Homework>> GetAllAsync()

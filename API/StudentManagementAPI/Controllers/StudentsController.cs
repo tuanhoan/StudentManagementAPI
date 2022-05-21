@@ -32,6 +32,13 @@ namespace StudentManagementAPI.Controllers
             return await _studentService.GetAllAsync();
         }
 
+        [HttpGet("teams/{teamId:int}")]
+        public async Task<List<Students>> GetByTeamId(int teamId)
+        {
+            return await _studentService.GetByTeamId(teamId);
+        }
+       
+
         [HttpGet("current-student")]
         public async Task<Students> GetCurrentStudent(Guid userId)
         {

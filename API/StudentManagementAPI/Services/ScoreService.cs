@@ -22,6 +22,7 @@ namespace StudentManagementAPI.Services
                 .Include(x => x.SubjectNavigation)
                 .Include(x => x.SemesterNavigation)
                 .AsNoTracking()
+                .Take(100)
                 .ToListAsync();
         }
 
@@ -38,6 +39,19 @@ namespace StudentManagementAPI.Services
                 .Include(x => x.SubjectNavigation)
                 .Include(x => x.SemesterNavigation)
                 .Include(x=>x.StudentNavigation)
+                .AsNoTracking()
+                .ToListAsync();
+        }
+
+        public async Task<List<Score>> GetBySubjectIdTeamId(int subjectId, int teamId, int semesterId)
+        {
+            return await _context.Scores
+                .Include(x => x.TestTypeNavigation)
+                .Include(x => x.SubjectNavigation)
+                .Include(x => x.SemesterNavigation)
+                .Include(x => x.StudentNavigation)
+                    .ThenInclude(x=>x.AppUser)
+                .Where(x => x.SubjectId == subjectId && x.StudentNavigation.TeamId == teamId&&x.SemesterId==semesterId)
                 .AsNoTracking()
                 .ToListAsync();
         }

@@ -35,6 +35,13 @@ namespace StudentManagementAPI.Controllers
             return Ok();
         }
 
+        [HttpGet("subjectId/{subjectId:int}/teamId/{teamId:int}/semester/{semesterId:int}")]
+        public async Task<List<ScoreViewDto>> GetBySubjectIdTeamId(int subjectId, int teamId, int semesterId)
+        {
+            var result = await _scoreService.GetBySubjectIdTeamId(subjectId, teamId, semesterId);
+            return _mapper.Map<List<ScoreViewDto>>(result);
+        }
+
         [HttpGet("generateData")]
         public async Task GenerateData()
         {

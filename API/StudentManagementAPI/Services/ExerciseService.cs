@@ -47,7 +47,7 @@ namespace StudentManagementAPI.Services
             result.Entity.Sources = sources.ToArray();
 
             await _context.SaveChangesAsync();
-            await SourcePath.SaveFileAsync(formFiles, PathEnum.Exercise.ToString(), result.Entity.HomeworkId);
+            await SourcePath.SaveFileAsync(formFiles, PathEnum.Exercise.ToString(), result.Entity.HomeworkId.ToString());
         }
     }
 }

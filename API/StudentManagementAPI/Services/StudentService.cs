@@ -63,6 +63,15 @@ namespace StudentManagementAPI.Services
                 .AsNoTracking().ToListAsync();
         }
 
+        public async Task<List<Students>> GetByTeamId(int teamId)
+        {
+            return await _context.Students
+                .Where(x=>x.TeamId == teamId)
+                .Include(x => x.AppUser)
+                .Include(x => x.TeamNavigation)
+                .AsNoTracking().ToListAsync();
+        }
+
         public async Task<Students> GetCurrentUser(Guid userId)
         {
             return await _context.Students

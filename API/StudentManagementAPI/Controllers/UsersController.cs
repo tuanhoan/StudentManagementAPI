@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudentManagementAPI.Dto;
 using StudentManagementAPI.Models;
 using StudentManagementAPI.Services;
 using StudentManagementAPI.ViewModel.Users;
+using System;
 using System.Threading.Tasks;
 
 namespace StudentManagementAPI.Controllers
@@ -14,10 +16,13 @@ namespace StudentManagementAPI.Controllers
     //[Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     public class UsersController : ControllerBase
     {
+        private IMapper _mapper;
         private UserServices _userServices;
-        public UsersController(UserServices userServices)
+        public UsersController(UserServices userServices,
+            IMapper mapper)
         {
             _userServices = userServices;
+            _mapper = mapper;
         }
 
         [HttpPost("Authenticate")]
@@ -41,15 +46,21 @@ namespace StudentManagementAPI.Controllers
         }
 
         [HttpGet("{userName}")]
-        public async Task<AppUser> GetCurrentUser(string userName)
+        public async Task<UserInfoDto> GetCurrentUser(string userName)
         {
-            return await _userServices.GetCurrentUser(userName);
+            var rs =  await _userServices.GetCurrentUser(userName);
+            return _mapper.Map<UserInfoDto>(rs);
         }
 
         [HttpPost("UpdateInfo")]
-        public async Task<AppUser> UpdateInfo(Profile profile)
+        public async Task<AppUser> UpdateInfo(Dto.Profile profile)
         {
             return await _userServices.UpdateInfo(profile);
+        }
+        [HttpPost("UpdateAvatar")]
+        public async Task<AppUser> UpdateAvatar(IFormFileCollection files, string username)
+        {
+            return await _userServices.UpdateAvatar(files, username);
         }
         [HttpGet("reset-password")]
         public async Task ResetPass(string userName)

@@ -1,0 +1,49 @@
+<div class="mat-elevation-z8" *ngIf="isList">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="FullName">
+      <th mat-header-cell *matHeaderCellDef>Họ và tên</th>
+      <td mat-cell *matCellDef="let element">{{ element?.studentName }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Score15P">
+      <th mat-header-cell *matHeaderCellDef>Điểm 15p</th>
+      <td mat-cell *matCellDef="let element">{{ element?.score15p }}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="Score60P">
+      <th mat-header-cell *matHeaderCellDef>Điểm 60p</th>
+      <td mat-cell *matCellDef="let element">{{ element?.score60p }}</td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="ScoreHK">
+      <th mat-header-cell *matHeaderCellDef>Điểm Học Kì</th>
+      <td mat-cell *matCellDef="let element">{{ element?.scoreHK }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="ScoreTB">
+      <th mat-header-cell *matHeaderCellDef>Điểm Trung Bình</th>
+      <td mat-cell *matCellDef="let element">{{ element?.scoreTb }}</td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[15]"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements"
+  >
+  </mat-paginator>
+</div>
+
+<div *ngIf="!isList">
+  <button (click)="isList=true">Trở về</button>
+  <app-score-view StudentId="{{studentId}}"></app-score-view>
+</div>
+
+<!-- <p *ngIf="students!=null">{{students[0]?.team}}</p> -->

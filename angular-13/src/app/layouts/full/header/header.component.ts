@@ -7,9 +7,10 @@ import { Router } from "@angular/router";
   styleUrls: [],
 })
 export class AppHeaderComponent {
+  avatar = localStorage.getItem("avatar");
   constructor(private router: Router) {}
   Logout() {
-    localStorage.removeItem("token");
+    localStorage.clear();
     this.router.navigate(["login"]);
   }
 }

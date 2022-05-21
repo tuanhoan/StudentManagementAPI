@@ -19,7 +19,6 @@ import { TeacherListComponent } from "./Admin/teacher-management/teacher-list.co
 import { ClipboardModule } from "@angular/cdk/clipboard";
 import { MatTableModule } from "@angular/material/table";
 import { TeacherDetailsComponent } from "./Admin/teacher-details/teacher-details.component";
-import { ProfilesComponent } from "./profiles/profiles.component";
 import { UserProfileComponent } from "./user-profile/user-profile.component";
 import { VideoCallComponent } from "./VideoChat/video-call/video-call.component";
 import { CallInfoDialogComponent } from "./VideoChat/call-info-dialog/call-info-dialog.component";
@@ -37,6 +36,8 @@ import { TeamListComponent } from "./Admin/homework/team-list/team-list.componen
 import { MatGridListModule } from "@angular/material/grid-list";
 import { BulkUploadComponent } from "./Admin/student/bulk-upload/bulk-upload.component";
 import { ScoreItemComponent } from "./Admin/score-view/score-item/score-item.component";
+import { ScoreListComponent } from "./Admin/score-view/score-list/score-list.component";
+import { ScoreStudentComponent } from "./Admin/score-view/score-student/score-student.component";
 
 @NgModule({
   imports: [
@@ -61,7 +62,6 @@ import { ScoreItemComponent } from "./Admin/score-view/score-item/score-item.com
     HomeComponent,
     TeacherListComponent,
     TeacherDetailsComponent,
-    ProfilesComponent,
     UserProfileComponent,
     VideoCallComponent,
     CallInfoDialogComponent,
@@ -75,7 +75,9 @@ import { ScoreItemComponent } from "./Admin/score-view/score-item/score-item.com
     HomeworkDetailComponent,
     TeamListComponent,
     BulkUploadComponent,
-    ScoreItemComponent
+    ScoreItemComponent,
+    ScoreListComponent,
+    ScoreStudentComponent
   ],
 exports:[ScoreComponent, HomeworkDetailComponent]
 })

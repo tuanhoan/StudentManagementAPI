@@ -15,6 +15,7 @@ const MENUITEMS = [
   { state: 'post-newsfeed', name: 'Bảng tin', type: 'link', icon: 'av_timer' },
   { state: 'students-list', name: 'Học sinh', type: 'link', icon: 'av_timer' },
   { state: 'view-score', name: 'Điểm', type: 'link', icon: 'av_timer' },
+  { state: 'score-list', name: 'Danh sách điểm', type: 'link', icon: 'av_timer' },
   { state: 'homework-list', name: 'Bài tập', type: 'link', icon: 'av_timer' },
 ];
 

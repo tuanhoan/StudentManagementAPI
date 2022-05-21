@@ -9,7 +9,7 @@ namespace StudentManagementAPI.Extensions
     public static class SourcePath
     {
         private static IWebHostEnvironment _hostingEnvironment;
-        public static string Path = "";
+        public static string Path = ""; 
 
         public static bool IsInitialized { get; private set; }
 
@@ -23,7 +23,7 @@ namespace StudentManagementAPI.Extensions
             Path = $"{_hostingEnvironment.ContentRootPath}\\uploads".Replace("API\\StudentManagementAPI\\uploads", "angular-13\\src\\assets");
         }
 
-        public static async Task SaveFileAsync(IFormFileCollection files, string Folder, int Id)
+        public static async Task SaveFileAsync(IFormFileCollection files, string Folder, string Id)
         {
             if (!IsInitialized)
                 throw new InvalidOperationException("Object is not initialized");

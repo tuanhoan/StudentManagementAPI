@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using StudentManagementAPI.Dto;
+using StudentManagementAPI.Enums;
+using StudentManagementAPI.Extensions;
 using StudentManagementAPI.Models;
 using StudentManagementAPI.ViewModel.Users;
 using System;
@@ -22,11 +26,13 @@ namespace StudentManagementAPI.Services
         private SignInManager<AppUser> _signInManager;
         private RoleManager<AppRole> _roleManager;
         private IConfiguration _config;
+        private IMapper _mapper;
         public UserServices(UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             RoleManager<AppRole> roleManager,
             IConfiguration config,
-            StudentManagementContext context
+            StudentManagementContext context,
+            IMapper mapper
             )
         {
             _userManager = userManager;
@@ -34,6 +40,7 @@ namespace StudentManagementAPI.Services
             _roleManager = roleManager;
             _config = config;
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<(string, string, IList<string>, Guid)> Authencate(LoginRequest request)
@@ -96,21 +103,40 @@ namespace StudentManagementAPI.Services
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<AppUser> UpdateInfo(Profile profile)
+        public async Task<AppUser> UpdateInfo(Dto.Profile profile)
         {
             var user = await _userManager.FindByNameAsync(profile.username);
-
+            user.Address = profile.address;
+            user.Email = profile.email;
+            user.PhoneNumber = profile.phoneNumber;
             user.FullName = profile.fullName;
+
             if (!String.IsNullOrEmpty(profile.birthday))
             {
                 user.Birthday = Convert.ToDateTime(profile.birthday);
             }
 
-            user.PhoneNumber = profile.phoneNumber;
+           
 
 
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
+            return user;
+        }
+
+        public async Task<AppUser> UpdateAvatar(IFormFileCollection files, string username)
+        { 
+            var user = await _userManager.FindByNameAsync(username);
+            if (user == null)
+            {
+                throw new Exception("Không tìm thấy user");
+            }
+
+            user.AvatarPath = files.FirstOrDefault()?.FileName;
+
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            await SourcePath.SaveFileAsync(files, PathEnum.Avatar.ToString(), user.Id.ToString());
             return user;
         }
 

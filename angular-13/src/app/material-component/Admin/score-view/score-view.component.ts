@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { HttpServerService } from "src/app/Services/http-server.service";
 import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
@@ -9,6 +9,7 @@ import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 })
 export class ScoreComponent implements OnInit {
   semester: any;
+  @Input() StudentId = localStorage.getItem("studentId");
   constructor(private httpService: HttpServerService) {}
   ngOnInit(): void {
     this.httpService.Get("Semesters").subscribe((data) => {
