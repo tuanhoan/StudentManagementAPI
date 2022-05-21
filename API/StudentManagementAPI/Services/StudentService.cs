@@ -43,6 +43,7 @@ namespace StudentManagementAPI.Services
             var rs = await _userManager.FindByNameAsync(user.UserName);
             if (rs != null)
             {
+                await _userManager.AddToRoleAsync(rs, "student");
                 var student = new Students()
                 {
                     AppUserId = rs.Id,
@@ -84,11 +85,7 @@ namespace StudentManagementAPI.Services
                     
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
                     var rowCount = worksheet.Dimension.Rows;
-
-                    
-
-                    
-
+                     
                     for (int row = 2; row <= rowCount; row++)
                     {
                         var dateTmp = worksheet.Cells[4, 3].Value?.ToString().Trim();

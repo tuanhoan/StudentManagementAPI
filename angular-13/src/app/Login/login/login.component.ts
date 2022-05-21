@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
         infor.username = data.item2;
         infor.userId = data.item4;
         infor.role = data.item3[0];
-        console.log(infor);
 
         localStorage.setItem("token", infor.token);
         localStorage.setItem("username", infor.username);

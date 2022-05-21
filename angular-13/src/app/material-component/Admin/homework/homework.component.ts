@@ -60,11 +60,8 @@ export class HomeworkComponent implements OnInit {
     Array.from(this.files).map((file) => {
       return (this.fileName += file.name + " |");
     });
-
-    console.log(this.formHomework.value);
   }
   onSubmit() {
-    console.log(this.formHomework);
     const formData = new FormData();
 
     Array.from(this.files).map((file, index) => {

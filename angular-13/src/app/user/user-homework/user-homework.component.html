@@ -1,23 +1,31 @@
+<div
+  class="banner-innerpage"
+  style="
+    background-image: url(assets/user/images/landingpage/banner-bg2.jpg);
+    max-height: 10px;
+  "
+></div>
+
 <div class="container">
   <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
-    <div class="col" *ngFor="let data of teams">
+    <div class="col" *ngFor="let data of subjects">
       <div class="card radius-15">
         <div class="card-body text-center">
           <div class="p-4 border radius-15">
             <img
-              src="https://bootdey.com/img/Content/avatar/avatar7.png"
+              src="https://png.pngtree.com/png-clipart/20190904/original/pngtree-three-books-hand-drawn-illustration-png-image_4501557.jpg"
               width="110"
               height="110"
               class="rounded-circle shadow"
               alt=""
             />
-            <h5 class="mb-0 mt-5">{{ data.name }}</h5>
+            <h5 class="mb-0 mt-5">Môn {{ data.name }}</h5>
             <p class="mb-3">
-              Môn {{ data.mapTeacherSubjectTeams[0].subjectNavigation.name }}
+              Số lượng : 10
             </p>
             <div class="d-grid">
               <a
-                [routerLink]="['/homework-list/' + data.id]"
+                [routerLink]="['list/' + data.id]"
                 class="btn btn-outline-primary radius-15"
                 >Truy cập</a
               >
@@ -28,3 +36,4 @@
     </div>
   </div>
 </div>
+

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { FormControl } from "@angular/forms";
 import { HttpServerService } from "src/app/Services/http-server.service";
 
 @Component({
@@ -11,34 +12,43 @@ export class ExerciseComponent implements OnInit {
   @Input() Id: number = 0;
   content = "";
 
-  constructor(
-    public service: HttpServerService,
-  ) {
-  }
+  constructor(public service: HttpServerService) {}
+  files = [];
+  fileName = "";
   ngOnInit(): void {
-    this.service.Get("Exercises/"+this.Id).subscribe((data) => {
+    this.service.Get("Exercises/" + this.Id).subscribe((data) => {
       this.comments = data;
-      console.log(data);
-
     });
   }
+  onFileSelected(event: any) {
+    this.files = event.target.files;
+    Array.from(this.files).map((file: any) => {
+      return (this.fileName += file.name + " |");
+    });
 
+    // console.log(this.formHomework.value);
+  }
   public async submit() {
-    // if (this.content == "") {
-    //   return;
-    // }
-    // let body = {
-    //   UserId: localStorage.getItem("userId"),
-    //   newsFeedId: this.Id,
-    //   Content: this.content,
-    // };
-    // this.content = "";
-    // (await this.commentService.Comment(body)).subscribe((data) => {
-    //   console.log("success", data);
-    //   this.commentService.getById(this.Id).subscribe((data) => {
-    //     console.log(data);
-    //     this.comments = data;
-    //   });
-    // });
+    if (this.content == "") {
+      return;
+    }
+    const formData = new FormData();
+
+    Array.from(this.files).map((file: any, index) => {
+      return formData.append("formFiles", file, file.name);
+    });
+    formData.append("userId", localStorage.getItem("userId") + "");
+    formData.append("homeworkId", this.Id + "");
+    formData.append("content", this.content);
+
+    this.content = "";
+    this.fileName = "";
+    this.files = [];
+
+    (await this.service.Post("Exercises", formData, {})).subscribe((p) => {
+      this.service.Get("Exercises/" + this.Id).subscribe((data) => {
+        this.comments = data;
+      });
+    });
   }
 }

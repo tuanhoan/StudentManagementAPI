@@ -76,9 +76,12 @@ namespace StudentManagementAPI.Services
                 Birthday = request.Birthday,
                 PhoneNumber = request.PhoneNumber
             };
+
             var result = await _userManager.CreateAsync(user, request.Password);
+
             if (result.Succeeded)
             {
+                var x = await _userManager.AddToRoleAsync(user, "student");
                 return true;
             }
             return false;
@@ -109,6 +112,13 @@ namespace StudentManagementAPI.Services
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return user;
+        }
+
+        public async Task ResetPassword(string usserName)
+        {
+            var model = await _context.Users.Where(x => x.UserName == usserName).FirstOrDefaultAsync();
+            string resetToken = await _userManager.GeneratePasswordResetTokenAsync(model);
+            IdentityResult passwordChangeResult = await _userManager.ResetPasswordAsync(model, resetToken, model.UserName + "@LTT2022");
         }
     }
 }

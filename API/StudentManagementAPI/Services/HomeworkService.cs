@@ -65,6 +65,20 @@ namespace StudentManagementAPI.Services
             return rs;
         }
 
+        public async Task<List<Homework>> GetBySubjectId(int subjectId, int teamId)
+        {
+            var rs = await _context.Homeworks
+                .Include(x => x.UserNavigation)
+                    .ThenInclude(x => x.TeacherNavigation)
+                    .ThenInclude(x => x.SubjectNavigation)
+                .Include(x => x.TeamNavigation)
+                .Where(x => x.UserNavigation.TeacherNavigation.SubjectNavigation.Id == subjectId && x.TeamNavigation.Id == teamId)
+                .AsNoTracking()
+                .OrderByDescending(x => x.CreateAt).ToListAsync();
+
+            return rs;
+        }
+
         public async Task<Homework> GetById(int id)
         {
             return await _context.Homeworks

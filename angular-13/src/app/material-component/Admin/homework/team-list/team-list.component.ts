@@ -14,7 +14,7 @@ export class TeamListComponent implements OnInit {
   teams: any;
   constructor(private httpService: HttpServerService) {}
   ngOnInit(): void {
-    this.httpService.Get("Teachers/get-teams?teacherId=39").subscribe((data) => {
+    this.httpService.Get("Teachers/get-teams?teacherId="+localStorage.getItem("teacherId")).subscribe((data) => {
       console.log(data);
       this.teams = data;
     });

@@ -24,8 +24,11 @@ export class HomeworkDetailComponent implements OnInit {
     this.id = activatedRouter.snapshot.paramMap.get("id");
   }
   ngOnInit(): void {
-    this.httpService.Get("Homeworks/41").subscribe((data) => {
+    this.httpService.Get("Homeworks/"+this.id).subscribe((data) => {
       this.homeworks = data;
+      console.log(this.id, localStorage.getItem("teamId"));
+
+      console.log("homework",data);
     });
   }
 }

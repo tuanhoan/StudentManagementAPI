@@ -62,6 +62,7 @@ namespace StudentManagementAPI.Services
 
             var result =  await _context.MapTeacherSubjectTeams
                 .Where(x=>x.TeacherId == teacherId)
+                .Include(x=>x.SubjectNavigation)
                 .Include(x => x.TeamNavigation) 
                 .AsNoTracking()
                 .ToListAsync();

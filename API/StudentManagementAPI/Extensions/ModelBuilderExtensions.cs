@@ -17,6 +17,22 @@ namespace StudentManagementAPI.Extensions
                 Name = "admin",
                 NormalizedName = "admin",
                 Description = "Administrator role"
+            },
+             new
+             {
+                 Id = new Guid("7f0ac7fe-bb4e-4be2-941a-d368e3f9336a"),
+                 ConcurrencyStamp = "807fd416-0522-4d8f-860d-5b85c4beec9b",
+                 Description = "Student role",
+                 Name = "student",
+                 NormalizedName = "student"
+             },
+            new
+            {
+                Id = new Guid("22292118-048a-4673-a21f-2f3ae6fc9243"),
+                ConcurrencyStamp = "f48b70c5-9c19-4311-9272-0891508ed235",
+                Description = "Teacher role",
+                Name = "teacher",
+                NormalizedName = "teacher"
             });
 
             var hasher = new PasswordHasher<AppUser>();

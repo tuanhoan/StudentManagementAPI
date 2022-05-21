@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="formHomework" >
+<form (ngSubmit)="onSubmit()" [formGroup]="formHomework">
   <h1>Đăng bài</h1>
 
   <div>
@@ -27,14 +27,17 @@
 
   <!-- Upload -->
 
-  <input (change)="onFileSelected($event)" type="file" multiple formControlName="file" id="myFile" name="filename">
-
-
+  <input
+    (change)="onFileSelected($event)"
+    type="file"
+    multiple
+    formControlName="file"
+    id="myFile"
+    name="filename"
+  />
 
   <button type="submit">Submit</button>
 </form>
 <div class="file-upload">
   {{ fileName || "No file uploaded yet." }}
-
-
 </div>

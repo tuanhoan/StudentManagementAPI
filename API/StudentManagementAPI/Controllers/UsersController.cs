@@ -51,5 +51,10 @@ namespace StudentManagementAPI.Controllers
         {
             return await _userServices.UpdateInfo(profile);
         }
+        [HttpGet("reset-password")]
+        public async Task ResetPass(string userName)
+        {
+            await _userServices.ResetPassword(userName);
+        }
     }
 }

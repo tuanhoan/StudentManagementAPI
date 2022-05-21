@@ -23,6 +23,10 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { CommentComponent } from './comment/comment.component';
 import { UserScoreComponent } from './user-score/user-score.component';
 import { MatTableModule } from '@angular/material/table';
+import { MaterialComponentsModule } from '../material-component/material.module';
+import { UserHomeworkComponent } from './user-homework/user-homework.component';
+import { UserHomeworkDetailsComponent } from './user-homework/user-homework-details/user-homework-details.component';
+import { UserHomeworkListComponent } from './user-homework/user-homework-list/user-homework-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,10 @@ import { MatTableModule } from '@angular/material/table';
     BannerNavigationComponent,
     FooterComponent,
     CommentComponent,
-    UserScoreComponent
+    UserScoreComponent,
+    UserHomeworkComponent,
+    UserHomeworkDetailsComponent,
+    UserHomeworkListComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +54,8 @@ import { MatTableModule } from '@angular/material/table';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MaterialComponentsModule
   ],
   providers: [ServiceblogService],
   exports: [CommentComponent],

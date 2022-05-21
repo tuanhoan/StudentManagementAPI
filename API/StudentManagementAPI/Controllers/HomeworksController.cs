@@ -58,5 +58,12 @@ namespace StudentManagementAPI.Controllers
 
             //.ForEach(item => item = $"{SourcePath.Path}/{PathEnum.Homework}/{src.Id}")
         }
+
+        [HttpGet("subject/{subjectId:int}/team/{teamId:int}")]
+        public async Task<List<HomeworkDetailDto>> GetBySubjectId(int subjectId, int teamId)
+        {
+            var result = await _homeworkService.GetBySubjectId(subjectId, teamId);
+            return _mapper.Map<List<HomeworkDetailDto>>(result);
+        }
     }
 }

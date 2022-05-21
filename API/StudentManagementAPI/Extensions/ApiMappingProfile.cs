@@ -22,6 +22,7 @@ namespace StudentManagementAPI.Extensions
 
             CreateMap<Homework, HomeworkDetailDto>()
                 .ForMember(x => x.UserFullName, act => act.MapFrom(src => src.UserNavigation.FullName))
+                .ForMember(x=>x.SubjectName, act => act.MapFrom(src => src.UserNavigation.TeacherNavigation.SubjectNavigation.Name))
                 .ForMember(x => x.Sources, act => act.MapFrom(src => src.Source.ToList()));
 
             CreateMap<Exercise, ExerciseDto>()

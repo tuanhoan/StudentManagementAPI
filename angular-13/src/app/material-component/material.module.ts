@@ -32,11 +32,11 @@ import { ScoreComponent } from "./Admin/score-view/score-view.component";
 import { HomeworkListComponent } from "./Admin/homework/homework-list/homework-list.component";
 import { HomeworkDetailComponent } from "./Admin/homework/homework-details/homework-details.component";
 import { CommentComponent } from "../User/comment/comment.component";
-import { AppsModule } from "../User/apps.module";
 import { ExerciseComponent } from "./Admin/homework/exercise/exercise.component";
 import { TeamListComponent } from "./Admin/homework/team-list/team-list.component";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { BulkUploadComponent } from "./Admin/student/bulk-upload/bulk-upload.component";
+import { ScoreItemComponent } from "./Admin/score-view/score-item/score-item.component";
 
 @NgModule({
   imports: [
@@ -53,7 +53,6 @@ import { BulkUploadComponent } from "./Admin/student/bulk-upload/bulk-upload.com
     MatTableModule,
     ClipboardModule,
     CKEditorModule,
-    AppsModule,
     MatGridListModule
   ],
   providers: [],
@@ -75,7 +74,9 @@ import { BulkUploadComponent } from "./Admin/student/bulk-upload/bulk-upload.com
     ExerciseComponent,
     HomeworkDetailComponent,
     TeamListComponent,
-    BulkUploadComponent
-  ]
+    BulkUploadComponent,
+    ScoreItemComponent
+  ],
+exports:[ScoreComponent, HomeworkDetailComponent]
 })
 export class MaterialComponentsModule {}
