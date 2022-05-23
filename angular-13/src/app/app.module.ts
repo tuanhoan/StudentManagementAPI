@@ -28,6 +28,7 @@ import { FormatContentPipe } from './Pipe/format-content.pipe';
 import { ProfileComponent } from './common/profile/profile.component';
 import { ExampleComponent } from './example/example.component';
 import { CommentComponent } from './User/comment/comment.component';
+import { AuthAdminGuard } from './auth-admin.guard';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { CommentComponent } from './User/comment/comment.component';
       provide: LocationStrategy,
       useClass: PathLocationStrategy
     },
-    AuthGuard
+    AuthGuard,
+    AuthAdminGuard
   ],
   bootstrap: [AppComponent],
 

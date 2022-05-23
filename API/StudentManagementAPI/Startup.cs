@@ -111,7 +111,7 @@ namespace StudentManagementAPI
             services.AddDbContext<StudentManagementContext>(options =>
             {
                 string connectstring = Configuration.GetConnectionString("DefaultConnection");
-                options.UseSqlServer(connectstring);
+                options.UseSqlServer(connectstring); 
             });
 
             services.AddIdentity<AppUser, AppRole>()

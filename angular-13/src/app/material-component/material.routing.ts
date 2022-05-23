@@ -48,5 +48,5 @@ export const MaterialRoutes: Routes = [
   { path: 'homework-list/:id', component: HomeworkListComponent },
   { path: 'homework-list', component: TeamListComponent },
   {path:'score-list', component:ScoreListComponent},
-  {path:'score-list/:id', component:ScoreStudentComponent}
+  {path:'score-list/:subjectid/:id', component:ScoreStudentComponent}
 ];

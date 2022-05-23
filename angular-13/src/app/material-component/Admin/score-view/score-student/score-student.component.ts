@@ -14,7 +14,9 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class ScoreStudentComponent implements OnInit {
   isList = true;
+  isEdit = false;
   studentId: any;
+  subjectid: any;
   displayedColumns: string[] = [
     "FullName",
     "Score15P",
@@ -40,12 +42,19 @@ export class ScoreStudentComponent implements OnInit {
     activatedRouter: ActivatedRoute
   ) {
     this.id = activatedRouter.snapshot.paramMap.get("id");
+    this.subjectid = activatedRouter.snapshot.paramMap.get("subjectid");
   }
   ngOnInit(): void {
     let oldId = 0;
     let student: any;
     this.httpService
-      .Get("Scores/subjectId/1/teamId/1/semester/1")
+      .Get(
+        "Scores/subjectId/" +
+          this.subjectid +
+          "/teamId/" +
+          this.id +
+          "/semester/1"
+      )
       .subscribe((data: any) => {
         data.forEach((element: any) => {
           if (oldId != element.studentId) {
@@ -79,38 +88,62 @@ export class ScoreStudentComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         console.log(this.dataSource);
       });
-
-    // this.httpService.Get("Students/teams/" + this.id).subscribe((data: any) => {
-    //   data.forEach((item: any) => {
-    //     let std = new Student();
-    //     std.fullName = item.appUser.fullName;
-    //     std.email = item.appUser.email;
-    //     std.birthday = item.appUser.birthday;
-    //     std.phoneNumber = item.appUser.phoneNumber;
-    //     std.team = item.teamNavigation?.name;
-    //     std.userName = item.appUser.userName;
-    //     std.Id = item.id;
-    //     this.students.push(std);
-    //   });
-    //   this.dataSource = new MatTableDataSource<Student>(this.students);
-    //   this.dataSource.paginator = this.paginator;
-    // });
   }
   ViewScore(Id: any) {
     this.isList = false;
     this.studentId = Id;
     console.log(Id);
   }
+  Edit() {
+    this.isEdit = !this.isEdit;
+    let scoreCreates:any = [];
+    this.studentScore.forEach((element: any) => {
+      console.log(element);
+
+      if (element.score15p != null) {
+        let student = new ScoreCreate();
+        student.semesterId = element.semesterId;
+        student.studentId = element.studentId;
+        student.subjectId = element.subjectId;
+        student.testTypeId = 1;
+        student.point = element.score15p;
+        scoreCreates.push(student);
+      }
+      if (element.score60p != null) {
+        let student = new ScoreCreate();
+        student.semesterId = element.semesterId;
+        student.studentId = element.studentId;
+        student.subjectId = element.subjectId;
+        student.testTypeId = 2;
+        student.point = element.score60p;
+        scoreCreates.push(student);
+      }
+      if (element.scoreHK != null) {
+        let student = new ScoreCreate();
+        student.semesterId = element.semesterId;
+        student.studentId = element.studentId;
+        student.subjectId = element.subjectId;
+        student.testTypeId = element.testTypeId;
+        student.point =3;
+        scoreCreates.push(student);
+      }
+    });
+    console.log(scoreCreates);
+    this.httpService.Post("Scores/update", scoreCreates).subscribe(data=>{
+      console.log("hhee",data);
+
+    })
+  }
+
+
 }
 
-export class Student {
-  Id = "";
-  fullName: string = "";
-  email: string = "";
-  birthday: Date = new Date();
-  phoneNumber: string = "";
-  team: string = "";
-  userName = "";
+export class ScoreCreate {
+  semesterId = 0;
+  studentId = 0;
+  subjectId = 0;
+  testTypeId = 0;
+  point = 0;
 }
 
 export class StudentScore {

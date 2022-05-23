@@ -56,5 +56,11 @@ namespace StudentManagementAPI.Controllers
             return _mapper.Map<List<ScoreViewDto>>(result);
         }
 
+        [HttpPost("update")]
+        public async Task UpdateScore(List<Score> scores)
+        {
+             await _scoreService.UpdateScore(scores);
+        }
+
     }
 }

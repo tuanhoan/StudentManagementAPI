@@ -2,6 +2,7 @@
 using StudentManagementAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,6 +31,15 @@ namespace StudentManagementAPI.Services
         {
             _context.Scores.Add(score);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateScore(List<Score> scores)
+        {
+            foreach(var item in scores)
+            {
+                _context.Scores.Update(item);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task<List<Score>> GetByStudentId(int studentId, int semesterId)
