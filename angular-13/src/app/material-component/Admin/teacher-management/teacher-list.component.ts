@@ -32,7 +32,6 @@ export class TeacherListComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.teacherService.getAll().subscribe((data) => {
       this.teachers = data;
-      // console.log(new MatTableDataSource<any>(this.teachers));
       this.teachers.forEach((element: any, index) => {
         this.ELEMENT_DATA.push({
           id: element.id,
