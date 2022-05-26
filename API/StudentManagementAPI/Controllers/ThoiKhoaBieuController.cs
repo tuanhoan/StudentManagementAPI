@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using StudentManagementAPI.Models;
 using StudentManagementAPI.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -215,6 +216,7 @@ namespace StudentManagementAPI.Controllers
         {
             Task.Run(() =>
             {
+                ReProgress();
                 _teacherSubjectTeamServices.ProgressData();
             });
 
@@ -224,6 +226,30 @@ namespace StudentManagementAPI.Controllers
         public async Task<List<MapTeacherSubjectTeam>> GetByTeacherId(int Id)
         {
             return await _teacherSubjectTeamServices.GetByTeacherId(Id);
+        }
+        [HttpGet("ReProgress")]
+        public IActionResult ReProgress()
+        {
+            Random rnd = new Random();
+            var sss = DataTKB;
+            for (int i = 0; i < sss.Count; i++)
+            {
+                for (int j = 0; j < sss[j].Count; j++)
+                {
+                    var phamvi = j / 4 * 4 + 3;
+                    var newMang = sss[i].Skip(phamvi).Take(4);
+                    if (newMang.FirstOrDefault(x => sss[i][j] == x) != null)
+                    {
+                        int kq = rnd.Next(0, sss[i].Count);
+                        string temp = sss[i][j];
+                        sss[i][j] = sss[i][kq];
+                        sss[i][kq] = temp;
+
+                    }
+
+                }
+            }
+            return Ok("OK");
         }
     }
 }

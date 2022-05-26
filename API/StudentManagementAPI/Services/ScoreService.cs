@@ -2,6 +2,7 @@
 using StudentManagementAPI.Models;
 using System;
 using System.Collections.Generic;
+using StudentManagementAPI.Dto;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,11 +36,46 @@ namespace StudentManagementAPI.Services
 
         public async Task UpdateScore(List<Score> scores)
         {
-            foreach(var item in scores)
+            foreach (var item in scores)
             {
                 _context.Scores.Update(item);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<List<StatistialScore>> Statistical()
+        {
+            var scores = await _context.Scores
+                .Include(x=>x.StudentNavigation)
+                .ToListAsync();
+            var teams = await _context.Teams.ToListAsync();
+            var statistialScores = new List<StatistialScore>();
+            foreach (var team in teams)
+            {
+                var scs = scores.Where(x => x.StudentNavigation.TeamId == team.Id).ToList();
+                var data = new StatistialScore()
+                {
+                    Name = team.Name,
+                }; 
+                if(scs.Where(x => x.Point < 5).Count() > 0)
+                {
+                    data.Yeu = (double)scs.Where(x => x.Point < 5).Count() / (double)scs.Count() * (double)100;
+                }
+                if (scs.Where(x => x.Point >= 5 && x.Point < 6.5).Count() > 0)
+                {
+                    data.TB = (double)scs.Where(x => x.Point >= 5 && x.Point < 6.5).Count() / (double)scs.Count() * (double)100;
+                }
+                if (scs.Where(x => x.Point >= 6.5 & x.Point < 8).Count() > 0)
+                {
+                    data.Kha = (double)scs.Where(x => x.Point >= 6.5 & x.Point < 8).Count() / (double)scs.Count() * (double)100;
+                }
+                if (scs.Where(x => x.Point >= 8).Count() > 0)
+                {
+                    data.Gioi = (double)scs.Where(x => x.Point >= 8).Count() / (double)scs.Count() * (double)100;
+                }
+                statistialScores.Add(data);
+            }
+            return statistialScores;
         }
 
         public async Task<List<Score>> GetByStudentId(int studentId, int semesterId)
@@ -48,7 +84,7 @@ namespace StudentManagementAPI.Services
                 .Include(x => x.TestTypeNavigation)
                 .Include(x => x.SubjectNavigation)
                 .Include(x => x.SemesterNavigation)
-                .Include(x=>x.StudentNavigation)
+                .Include(x => x.StudentNavigation)
                 .AsNoTracking()
                 .ToListAsync();
         }
@@ -60,8 +96,8 @@ namespace StudentManagementAPI.Services
                 .Include(x => x.SubjectNavigation)
                 .Include(x => x.SemesterNavigation)
                 .Include(x => x.StudentNavigation)
-                    .ThenInclude(x=>x.AppUser)
-                .Where(x => x.SubjectId == subjectId && x.StudentNavigation.TeamId == teamId&&x.SemesterId==semesterId)
+                    .ThenInclude(x => x.AppUser)
+                .Where(x => x.SubjectId == subjectId && x.StudentNavigation.TeamId == teamId && x.SemesterId == semesterId)
                 .AsNoTracking()
                 .ToListAsync();
         }

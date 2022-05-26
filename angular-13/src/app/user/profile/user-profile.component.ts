@@ -13,11 +13,11 @@ import { HttpServerService } from "src/app/Services/http-server.service";
 import { LoginService } from "src/app/Services/login.service";
 
 @Component({
-  selector: "app-profile",
-  templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.scss"],
+  selector: "app-user-profile",
+  templateUrl: "./user-profile.component.html",
+  styleUrls: ["./user-profile.component.scss"],
 })
-export class ProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit {
   profile: Profile = new Profile();
 
   constructor(

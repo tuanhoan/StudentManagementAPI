@@ -16,17 +16,23 @@ import { HomeworkDetailComponent } from "./Admin/homework/homework-details/homew
 import { TeamListComponent } from "./Admin/homework/team-list/team-list.component";
 import { ScoreListComponent } from "./Admin/score-view/score-list/score-list.component";
 import { ScoreStudentComponent } from "./Admin/score-view/score-student/score-student.component";
+import { ChartComponent } from "./Admin/chart/chart.component";
+import { AuthTeacherGuard } from "../auth-teacher.guard";
 
 export const MaterialRoutes: Routes = [
   {
     path: "home",
     component: HomeComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthTeacherGuard],
   },
   {
     path: "teachers",
+    canActivate: [AuthTeacherGuard],
     children: [
-      { path: "", component: TeacherListComponent },
+      {
+        path: "",
+        component: TeacherListComponent,
+      },
       {
         path: ":id",
         component: TeacherDetailsComponent,
@@ -38,15 +44,44 @@ export const MaterialRoutes: Routes = [
     path: "profile",
     component: ProfileComponent,
   },
-  { path: "videocall", component: VideoCallComponent },
-  { path: "post-newsfeed", component: PostNewsFeedComponent },
-  { path: "students", component: StudentComponent },
-  { path: "students-list", component: StudentListComponent },
+  {
+    path: "videocall",
+    component: VideoCallComponent,
+    canActivate: [AuthTeacherGuard],
+  },
+  {
+    path: "post-newsfeed",
+    component: PostNewsFeedComponent,
+    canActivate: [AuthTeacherGuard],
+  },
+  {
+    path: "students",
+    component: StudentComponent,
+    canActivate: [AuthTeacherGuard],
+  },
+  {
+    path: "students-list",
+    component: StudentListComponent,
+    canActivate: [AuthTeacherGuard],
+  },
   { path: "view-score", component: ScoreComponent },
-  { path: "homework/:id", component: HomeworkDetailComponent, canActivate: [AuthGuard], },
-  { path: "add-homework/:id", component: HomeworkComponent, canActivate: [AuthGuard], },
-  { path: 'homework-list/:id', component: HomeworkListComponent },
-  { path: 'homework-list', component: TeamListComponent },
-  {path:'score-list', component:ScoreListComponent},
-  {path:'score-list/:subjectid/:id', component:ScoreStudentComponent}
+  {
+    path: "homework/:id",
+    component: HomeworkDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "add-homework/:id",
+    component: HomeworkComponent,
+    canActivate: [AuthTeacherGuard],
+  },
+  { path: "homework-list/:id", component: HomeworkListComponent },
+  { path: "homework-list", component: TeamListComponent },
+  { path: "score-list", component: ScoreListComponent },
+  {
+    path: "score-list/:subjectid/:id",
+    component: ScoreStudentComponent,
+    canActivate: [AuthTeacherGuard],
+  },
+  { path: "chart", component: ChartComponent, canActivate: [AuthTeacherGuard] },
 ];

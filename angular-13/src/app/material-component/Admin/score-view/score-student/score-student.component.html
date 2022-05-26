@@ -1,4 +1,4 @@
-<button (click)="Edit()">{{isEdit?"Lưu":"Sửa"}}</button>
+<button mat-raised-button color="primary" class="mb-3" (click)="Edit()">{{isEdit?"Lưu":"Sửa"}}</button>
 <div class="mat-elevation-z8" *ngIf="isList">
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="FullName">

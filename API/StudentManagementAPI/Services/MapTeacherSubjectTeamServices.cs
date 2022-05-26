@@ -36,32 +36,37 @@ namespace StudentManagementAPI.Services
             var datas = ThoiKhoaBieuController.DataTKB;
             var matrix = RotateMatrix(datas, 24, 39);
             Random rnd = new Random();
-            for (int i = 0; i < matrix.Count; i++)
+            var hasError = true;
+            while (hasError)
             {
-                for (int j = 0; j < matrix[i].Count; j++)
+                hasError = false;
+                for (int i = 0; i < matrix.Count; i++)
                 {
-                    var name = matrix[i][j];
-                    if (matrix[i].Where(x => x == name).Count() > 1)
+                    for (int j = 0; j < matrix[i].Count; j++)
                     {
-                        int kq = rnd.Next(0, matrix.Count);
-                        var nameRdn = matrix[kq][j];
-                        var countRdn = matrix[i].Where(x => x == nameRdn).Count();
-                        if (countRdn == 0)
+                        var name = matrix[i][j];
+                        if (matrix[i].Where(x => x == name).Count() > 1)
                         {
-                            Debug.WriteLine("Trước:" + matrix[i][j] + "----" + matrix[kq][j]);
-                            string temp = matrix[i][j];
-                            matrix[i][j] = matrix[kq][j];
-                            matrix[kq][j] = temp;
-                            Debug.WriteLine("Sau:" + matrix[i][j] + "----" + matrix[kq][j]);
+                            int kq = rnd.Next(0, matrix.Count);
+                            var nameRdn = matrix[kq][j];
+                            var countRdn = matrix[i].Where(x => x == nameRdn).Count();
+                            if (countRdn == 0)
+                            {
+                                hasError = true;
+                                string temp = matrix[i][j];
+                                matrix[i][j] = matrix[kq][j];
+                                matrix[kq][j] = temp;
+                            }
                         }
-                        Debug.WriteLine(name);
                     }
                 }
             }
-            var sss = RotateMatrix(matrix, 39, 24, 1);
-            ThoiKhoaBieuController.DataTKB = sss;
-        } 
 
+
+            var sss = RotateMatrix(matrix, 39, 24, 1);
+
+            ThoiKhoaBieuController.DataTKB = sss;
+        }
         static List<List<string>> RotateMatrix(List<List<string>> matrix, int row, int column, int flag = 0)
         {
             List<List<string>> ret = new List<List<string>>();

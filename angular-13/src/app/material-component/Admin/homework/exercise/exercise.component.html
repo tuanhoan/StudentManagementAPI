@@ -39,7 +39,12 @@
             ><img
               class="img-circle img-sm"
               alt="Profile Picture"
-              src="https://bootdey.com/img/Content/avatar/avatar1.png"
+              src="{{
+                'assets\\uploads\\Avatar\\' +
+                  item.userId +
+                  '\\' +
+                  item.avatarPath
+              }}"
           /></a>
           <div class="media-body">
             <div class="mar-btm">
@@ -56,7 +61,7 @@
             <p>{{ item.content }}</p>
 
             <mat-list-item *ngFor="let file of item.sources">
-              <a href="{{ file }}">{{ file }}</a>
+              <a href="{{ file }}" target="_blank">{{ file.split("\\").at(-1) }}</a>
             </mat-list-item>
             <hr />
           </div>

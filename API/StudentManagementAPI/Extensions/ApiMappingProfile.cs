@@ -27,6 +27,8 @@ namespace StudentManagementAPI.Extensions
 
             CreateMap<Exercise, ExerciseDto>()
                 .ForMember(x => x.UserName, act => act.MapFrom(src => src.UserNavigation.FullName))
+                .ForMember(x => x.AvatarPath, act => act.MapFrom(src => src.UserNavigation.AvatarPath))
+                .ForMember(x => x.UserId, act => act.MapFrom(src => src.UserId))
                 .ForMember(x => x.Sources, act => act.MapFrom(src => src.Sources.ToList()));
 
             CreateMap<AppUser, UserInfoDto>()

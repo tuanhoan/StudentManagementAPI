@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { AuthAdminGuard } from "./auth-admin.guard";
+import { AuthTeacherGuard } from "./auth-teacher.guard";
 import { ErrorPageComponent } from "./error-page/error-page.component";
 
 import { FullComponent } from "./layouts/full/full.component";
@@ -19,7 +19,7 @@ export const AppRoutes: Routes = [
       },
       {
         path: "",
-        // canActivate:[AuthAdminGuard],
+
         loadChildren: () =>
           import("./material-component/material.module").then(
             (m) => m.MaterialComponentsModule

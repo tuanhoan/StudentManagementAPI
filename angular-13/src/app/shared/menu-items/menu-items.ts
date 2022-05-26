@@ -8,15 +8,15 @@ export interface Menu {
 }
 
 const MENUITEMS = [
-  { state: 'home', name: 'Trang chủ', type: 'link', icon: 'av_timer' },
-  { state: 'teachers', name: 'Giáo viên', type: 'link', icon: 'av_timer' },
-  { state: 'videocall', name: 'Video Call', type: 'link', icon: 'av_timer' },
+  { state: 'home', name: 'Trang chủ', type: 'link', icon: 'av_timer', role:'admin' },
+  { state: 'teachers', name: 'Giáo viên', type: 'link', icon: 'av_timer', role:'admin' },
+  { state: 'videocall', name: 'Video Call', type: 'link', icon: 'av_timer', role:'admin' },
   { state: 'dashboard', name: 'Dashboard', type: 'link', icon: 'av_timer' },
-  { state: 'post-newsfeed', name: 'Bảng tin', type: 'link', icon: 'av_timer' },
-  { state: 'students-list', name: 'Học sinh', type: 'link', icon: 'av_timer' },
-  { state: 'view-score', name: 'Điểm', type: 'link', icon: 'av_timer' },
-  { state: 'score-list', name: 'Danh sách điểm', type: 'link', icon: 'av_timer' },
-  { state: 'homework-list', name: 'Bài tập', type: 'link', icon: 'av_timer' },
+  { state: 'post-newsfeed', name: 'Bảng tin', type: 'link', icon: 'av_timer', role:'admin' },
+  { state: 'students-list', name: 'Học sinh', type: 'link', icon: 'av_timer', role:'admin' },
+  { state: 'score-list', name: 'Danh sách điểm', type: 'link', icon: 'av_timer', role:'admin' },
+  { state: 'homework-list', name: 'Bài tập', type: 'link', icon: 'av_timer', role:'admin' },
+  { state: 'chart', name: 'Thống kê', type: 'link', icon: 'av_timer', role:'admin' },
 ];
 
 @Injectable()

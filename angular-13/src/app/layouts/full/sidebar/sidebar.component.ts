@@ -13,6 +13,7 @@ export class AppSidebarComponent implements OnDestroy, OnInit {
   private _mobileQueryListener: () => void;
   name: any = "";
   avatar:any=localStorage.getItem("avatar");
+  role:any = localStorage.getItem("role");
 
   constructor(
     private router: Router,

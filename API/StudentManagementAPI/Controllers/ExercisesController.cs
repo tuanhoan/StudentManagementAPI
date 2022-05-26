@@ -34,7 +34,7 @@ namespace StudentManagementAPI.Controllers
                 {
                     for (int i = 0; i < item.Sources.Count; i++)
                     {
-                        item.Sources[i] = $"assets\\uploads\\{PathEnum.Homework}\\{item.HomeworkId}\\" + item.Sources[i];
+                        item.Sources[i] = $"assets\\uploads\\{PathEnum.Exercise}\\{item.HomeworkId}\\" + item.Sources[i];
                     }
                 }
             }

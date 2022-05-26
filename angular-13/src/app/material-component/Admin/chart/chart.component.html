@@ -1,0 +1,10 @@
+<div class="d-flex flex-wrap" >
+  <google-chart #chart *ngFor="let item of dataScores" class="shadow-lg p-3 mb-5 bg-white rounded"
+   [title]="title + item.name"
+   [type]="type"
+   [data]="item.data"
+   [options]="options"
+   [width]="width"
+   [height]="height">
+</google-chart>
+</div>

@@ -27,6 +27,7 @@ import { MaterialComponentsModule } from '../material-component/material.module'
 import { UserHomeworkComponent } from './user-homework/user-homework.component';
 import { UserHomeworkDetailsComponent } from './user-homework/user-homework-details/user-homework-details.component';
 import { UserHomeworkListComponent } from './user-homework/user-homework-list/user-homework-list.component';
+import { UserProfileComponent } from './profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { UserHomeworkListComponent } from './user-homework/user-homework-list/us
     UserScoreComponent,
     UserHomeworkComponent,
     UserHomeworkDetailsComponent,
-    UserHomeworkListComponent
+    UserHomeworkListComponent,
+    UserProfileComponent
   ],
   imports: [
     CommonModule,

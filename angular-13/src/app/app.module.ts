@@ -28,7 +28,7 @@ import { FormatContentPipe } from './Pipe/format-content.pipe';
 import { ProfileComponent } from './common/profile/profile.component';
 import { ExampleComponent } from './example/example.component';
 import { CommentComponent } from './User/comment/comment.component';
-import { AuthAdminGuard } from './auth-admin.guard';
+import { AuthTeacherGuard } from './auth-teacher.guard';
 
 @NgModule({
   declarations: [
@@ -64,7 +64,7 @@ import { AuthAdminGuard } from './auth-admin.guard';
       useClass: PathLocationStrategy
     },
     AuthGuard,
-    AuthAdminGuard
+    AuthTeacherGuard
   ],
   bootstrap: [AppComponent],
 

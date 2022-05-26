@@ -62,5 +62,11 @@ namespace StudentManagementAPI.Controllers
              await _scoreService.UpdateScore(scores);
         }
 
+        [HttpGet("statistical")]
+        public async Task<List<StatistialScore>> Statistical()
+        {
+           return await _scoreService.Statistical();
+        }
+
     }
 }

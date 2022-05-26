@@ -38,6 +38,9 @@ import { BulkUploadComponent } from "./Admin/student/bulk-upload/bulk-upload.com
 import { ScoreItemComponent } from "./Admin/score-view/score-item/score-item.component";
 import { ScoreListComponent } from "./Admin/score-view/score-list/score-list.component";
 import { ScoreStudentComponent } from "./Admin/score-view/score-student/score-student.component";
+import { ChartComponent } from "./Admin/chart/chart.component";
+import { GoogleChartsModule } from "angular-google-charts";
+import { ProfileComponent } from "../common/profile/profile.component";
 
 @NgModule({
   imports: [
@@ -54,7 +57,8 @@ import { ScoreStudentComponent } from "./Admin/score-view/score-student/score-st
     MatTableModule,
     ClipboardModule,
     CKEditorModule,
-    MatGridListModule
+    MatGridListModule,
+    GoogleChartsModule,
   ],
   providers: [],
   entryComponents: [],
@@ -77,8 +81,9 @@ import { ScoreStudentComponent } from "./Admin/score-view/score-student/score-st
     BulkUploadComponent,
     ScoreItemComponent,
     ScoreListComponent,
-    ScoreStudentComponent
+    ScoreStudentComponent,
+    ChartComponent,
   ],
-exports:[ScoreComponent, HomeworkDetailComponent]
+  exports: [ScoreComponent, HomeworkDetailComponent],
 })
 export class MaterialComponentsModule {}
