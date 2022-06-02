@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -43,31 +49,36 @@ export class TeacherListComponent implements AfterViewInit, OnInit {
         });
       });
 
-      this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
+      this.dataSource = new MatTableDataSource<PeriodicElement>(
+        this.ELEMENT_DATA
+      );
       console.log(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
       // console.log(this.paginator);
     });
-
   }
 
-  displayedColumns: string[] = ["no", "name", "subject", "email", "username", "action"];
+  displayedColumns: string[] = [
+    "no",
+    "name",
+    "subject",
+    "email",
+    "username",
+    "action",
+  ];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-
   ngAfterViewInit() {
     // this.dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
     // setTimeout(() => this.dataSource.paginator = this.paginator,10000);
-    console.log("after",this.paginator);
+    console.log("after", this.paginator);
 
     // this.dataSource.paginator = this.paginator;
   }
 
-  ViewChild(id: number){
-
-  }
+  ViewChild(id: number) {}
 }
 
 export interface PeriodicElement {

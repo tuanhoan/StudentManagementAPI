@@ -19,7 +19,8 @@ namespace StudentManagementAPI.Services
         }
         public async Task<List<Teams>> GetAllAsync()
         { 
-            return await _context.Teams.ToListAsync();
+            return await _context.Teams
+                .ToListAsync();
         }
     }
 }

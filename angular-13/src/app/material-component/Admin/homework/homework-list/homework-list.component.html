@@ -13,7 +13,7 @@
             <span class="colors1 mb-4">{{ data.title }}</span>
             <h5>
               <a [routerLink]="['/homework/' + data.id]">
-                <div [innerHTML]="data?.content.substring(0, 15) + '...'"></div>
+                <div [innerHTML]="data?.content.substring(0, 10) + '...'"></div>
               </a>
             </h5>
 

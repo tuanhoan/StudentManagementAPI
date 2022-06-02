@@ -18,8 +18,8 @@ import { LoginService } from "src/app/Services/login.service";
   styleUrls: ["./profile.component.scss"],
 })
 export class ProfileComponent {
-   @Input() durationInSeconds = 5;
-   @Input() content = "";
+  @Input() durationInSeconds = 5;
+  @Input() content = "";
 
   constructor(private _snackBar: MatSnackBar) {}
 
@@ -30,14 +30,14 @@ export class ProfileComponent {
   }
 }
 @Component({
-  selector: 'snack-bar-component-example-snack',
-  templateUrl: 'snack-bar-component-example-snack.html',
+  selector: "snack-bar-component-example-snack",
+  templateUrl: "snack-bar-component-example-snack.html",
   styles: [
     `
-    .example-pizza-party {
-      color: hotpink;
-    }
-  `,
+      .example-pizza-party {
+        color: hotpink;
+      }
+    `,
   ],
 })
 export class PizzaPartyComponent {}

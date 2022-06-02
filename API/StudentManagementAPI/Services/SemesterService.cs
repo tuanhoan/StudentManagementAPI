@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentManagementAPI.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace StudentManagementAPI.Services
@@ -14,8 +15,8 @@ namespace StudentManagementAPI.Services
         }
         public async Task<List<Semester>> GetAll()
         {
-            return await _context.Semesters 
-                .ToListAsync();
+            return await _context.Semesters
+                .OrderByDescending(x => x.TimeStart).ToListAsync();
         }
 
         public async Task Add(Semester semester)

@@ -1,7 +1,9 @@
 <div class="d-flex" cdkDropListGroup>
   <div class="example-container" *ngFor="let data of result; let i = index">
-    <div [ngStyle]="{'border': 'solid 2px #ccc'}">
-      <div   class="example-box" [ngStyle]="{'justify-content':'center'}">{{teams[i].name}}</div>
+    <div [ngStyle]="{ border: 'solid 2px #ccc' }">
+      <div class="example-box" [ngStyle]="{ 'justify-content': 'center' }">
+        {{ teams[i].name }}
+      </div>
     </div>
 
     <div
@@ -10,10 +12,11 @@
       class="example-list"
       (cdkDropListDropped)="drop($event)"
     >
-      <div *ngFor="let item of data; let index = index"  cdkDrag>
+      <div *ngFor="let item of data; let index = index" cdkDrag>
         <div
           [ngClass]="
-            index == 3 || index == 7 ||
+            index == 3 ||
+            index == 7 ||
             index == 11 ||
             index == 15 ||
             index == 19 ||
@@ -29,15 +32,6 @@
           {{ item.name }}
         </div>
       </div>
-      <!-- <div
-        [ngStyle]="{ 'background-color': item.color }"
-        class="example-box"
-        *ngFor="let item of data; let index = index"
-        cdkDrag
-      >
-        {{ item.name }}
-      </div> -->
-
     </div>
   </div>
 </div>

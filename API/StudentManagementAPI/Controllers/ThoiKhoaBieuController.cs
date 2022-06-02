@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using StudentManagementAPI.Models;
 using StudentManagementAPI.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -73,7 +75,7 @@ namespace StudentManagementAPI.Controllers
                     //workSheet.Hidden = OfficeOpenXml.eWorkSheetHidden.Hidden;
                 }
 
-              
+
                 List<List<string>> OneTeam = new List<List<string>>();
                 List<List<string>> NewList = new List<List<string>>();
                 List<List<string>> listkk = new List<List<string>>();
@@ -251,5 +253,44 @@ namespace StudentManagementAPI.Controllers
             }
             return Ok("OK");
         }
+
+
+        [HttpGet("export-timetable")]
+        public async Task ExportTimeTable()
+        {
+
+            var teams = await _teamServices.GetAllAsync();
+            teams = teams.OrderBy(x => x.Name).ToList();
+            var students = ThoiKhoaBieuController.DataTKB;
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            ExcelPackage excel = new ExcelPackage("D:\\timetable.xlsx");
+            var workSheet = excel.Workbook.Worksheets.Add("Sheet1");
+            workSheet.TabColor = System.Drawing.Color.Black;
+            workSheet.DefaultRowHeight = 12;
+            //Header of table  
+            //  
+            workSheet.Row(1).Height = 20;
+            workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(1).Style.Font.Bold = true;
+
+            for (int i = 0; i < teams.Count;i++)
+            {
+                workSheet.Cells[1, i+1].Value = teams[i].Name;
+                workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
+            }
+             
+            //Body of table  
+            
+
+            for(int i =0; i< students.Count; i++)
+            {
+                workSheet.Cells[2, i+1].LoadFromCollection(students[i]);
+            }
+            
+
+            excel.Save();
+             
+        }
     }
-}
+} 

@@ -29,9 +29,9 @@ export class HttpServerService {
     return this.httpClient.get<any>(url, this.httpOptions);
   }
 
-  public Post(url: string, data: any, newOption:any = null): Observable<any> {
+  public Post(url: string, data: any, newOption: any = null): Observable<any> {
     url = this.REST_API_SERVER + url;
-    if(newOption!=null){
+    if (newOption != null) {
       this.httpOptions = newOption;
     }
     return this.httpClient.post<any>(url, data, this.httpOptions);

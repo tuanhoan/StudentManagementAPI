@@ -55,15 +55,13 @@ export class LoginPageComponent implements OnInit {
             localStorage.setItem("avatar", user.avatarPath);
             localStorage.setItem("isStudent", user.isStudent);
 
-            if(infor.role == "admin"||infor.role =="teacher")
-            {
+            if (infor.role == "admin" || infor.role == "teacher") {
               console.log("sdasd");
 
               this.router.navigate([""]);
             }
 
-            if(infor.role == "student")
-              this.router.navigate(["user"])
+            if (infor.role == "student") this.router.navigate(["user"]);
           });
 
           this.snackBar.open("Đăng nhập thành công", undefined, {

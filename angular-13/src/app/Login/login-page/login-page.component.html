@@ -1,5 +1,9 @@
-<div class="main-wrapper" fxLayout="row" fxLayoutAlign="center center">
-
+<div
+  class="main-wrapper"
+  fxLayout="row"
+  fxLayoutAlign="center center"
+  [style.background-image]="'url(assets/images/login.png)'"
+>
   <mat-card class="box">
     <mat-card-header>
       <mat-card-title>Đăng nhập</mat-card-title>
@@ -8,15 +12,41 @@
     <form class="example-form" [formGroup]="formLogin" (ngSubmit)="Login()">
       <mat-card-content>
         <mat-form-field class="example-full-width">
-          <input matInput formControlName="username"  placeholder="Username">
+          <input matInput formControlName="username" placeholder="Tên đăng nhập" />
         </mat-form-field>
+        <p
+          *ngIf="formLogin.controls.username.hasError('required')"
+          class="text-danger"
+          style="font-size: xx-small"
+        >
+          * Không được để trống
+        </p>
 
         <mat-form-field class="example-full-width">
-          <input matInput type="password" formControlName="password" placeholder="Password">
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            placeholder="Mật khẩu"
+          />
         </mat-form-field>
+        <p
+          *ngIf="formLogin.controls.password.invalid"
+          class="text-danger"
+          style="font-size: xx-small"
+        >
+          * Không được để trống
+        </p>
       </mat-card-content>
-      <button type="submit" mat-stroked-button color="accent" class="btn-block">Sign-in</button>
+      <button
+        type="submit"
+        [disabled]="!formLogin.valid"
+        mat-stroked-button
+        color="accent"
+        class="btn-block"
+      >
+        Sign-in
+      </button>
     </form>
   </mat-card>
-
 </div>

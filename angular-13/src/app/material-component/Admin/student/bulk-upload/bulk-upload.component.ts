@@ -33,7 +33,6 @@ export class BulkUploadComponent implements OnInit {
         map((name) => (name ? this._filter(name) : this.options.slice()))
       );
     });
-
   }
   private _filter(name: string): any {
     const filterValue = name.toLowerCase();
@@ -54,7 +53,7 @@ export class BulkUploadComponent implements OnInit {
     });
 
     this.httpService
-      .Post("Students/upload-file?TeamId="+this.teamId, formData, {
+      .Post("Students/upload-file?TeamId=" + this.teamId, formData, {
         // reportProgress: true,
         // observe: "events",
       })
@@ -71,6 +70,5 @@ export class BulkUploadComponent implements OnInit {
     Array.from(this.files).map((file) => {
       return (this.fileName += file.name + " |");
     });
-
   }
 }

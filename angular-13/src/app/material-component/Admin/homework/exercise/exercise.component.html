@@ -61,7 +61,9 @@
             <p>{{ item.content }}</p>
 
             <mat-list-item *ngFor="let file of item.sources">
-              <a href="{{ file }}" target="_blank">{{ file.split("\\").at(-1) }}</a>
+              <a href="{{ file }}" target="_blank">{{
+                file.split("\\").at(-1)
+              }}</a>
             </mat-list-item>
             <hr />
           </div>

@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { HttpServerService } from "src/app/Services/http-server.service";
@@ -10,14 +9,16 @@ import { HttpServerService } from "src/app/Services/http-server.service";
 })
 export class HomeworkListComponent implements OnInit {
   homeworks: any;
-  id:any;
-  isAdd:boolean=false;
-  constructor(private httpService: HttpServerService,
-    activatedRouter: ActivatedRoute) {
-      this.id = activatedRouter.snapshot.paramMap.get("id");
-    }
+  id: any;
+  isAdd: boolean = false;
+  constructor(
+    private httpService: HttpServerService,
+    activatedRouter: ActivatedRoute
+  ) {
+    this.id = activatedRouter.snapshot.paramMap.get("id");
+  }
   ngOnInit(): void {
-    this.httpService.Get("Homeworks/teamId/"+this.id).subscribe((data) => {
+    this.httpService.Get("Homeworks/teamId/" + this.id).subscribe((data) => {
       console.log(data);
       this.homeworks = data;
     });

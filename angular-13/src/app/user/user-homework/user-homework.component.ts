@@ -9,11 +9,11 @@ import { ServiceblogService } from "../blog/blog-service.service";
 })
 export class UserHomeworkComponent implements OnInit {
   constructor(private httpService: HttpServerService) {}
-  subjects:any;
+  subjects: any;
   ngOnInit(): void {
     this.httpService.Get("Subject").subscribe((data) => {
       console.log(data);
-      this.subjects= data;
+      this.subjects = data;
     });
   }
 }

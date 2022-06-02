@@ -9,16 +9,25 @@ import { ServiceblogService } from "../../blog/blog-service.service";
   styleUrls: ["./user-homework-list.component.css"],
 })
 export class UserHomeworkListComponent implements OnInit {
-  id:any;
-  constructor(private httpService: HttpServerService,
-    activatedRouter: ActivatedRoute,) {
+  id: any;
+  constructor(
+    private httpService: HttpServerService,
+    activatedRouter: ActivatedRoute
+  ) {
     this.id = activatedRouter.snapshot.paramMap.get("id");
   }
-  homeworks:any;
+  homeworks: any;
   ngOnInit(): void {
-    this.httpService.Get("Homeworks/subject/"+this.id+"/team/"+ localStorage.getItem("teamId")).subscribe((data) => {
-      console.log(data);
-      this.homeworks= data;
-    });
+    this.httpService
+      .Get(
+        "Homeworks/subject/" +
+          this.id +
+          "/team/" +
+          localStorage.getItem("teamId")
+      )
+      .subscribe((data) => {
+        console.log(data);
+        this.homeworks = data;
+      });
   }
 }

@@ -3,7 +3,14 @@
 
   <div>
     <label for="name">Tiêu đề</label>
-    <input name="name" id="name" type="text" class="form-control" [(ngModel)]="model.title" placeholder="Nhập tiêu đề">
+    <input
+      name="name"
+      id="name"
+      type="text"
+      class="form-control"
+      [(ngModel)]="model.title"
+      placeholder="Nhập tiêu đề"
+    />
   </div>
 
   <label for="description">Nội dung</label>
@@ -16,5 +23,7 @@
   >
   </ckeditor>
 
-  <button mat-raised-button color="primary" class="mt-3" type="submit">Submit</button>
+  <button mat-raised-button color="primary" class="mt-3" type="submit">
+    Submit
+  </button>
 </form>

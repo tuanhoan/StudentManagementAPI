@@ -15,7 +15,6 @@ export class ScoreComponent implements OnInit {
     this.httpService.Get("Semesters").subscribe((data) => {
       this.semester = data;
     });
-
   }
 }
 

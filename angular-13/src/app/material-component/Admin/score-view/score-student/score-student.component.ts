@@ -96,7 +96,7 @@ export class ScoreStudentComponent implements OnInit {
   }
   Edit() {
     this.isEdit = !this.isEdit;
-    let scoreCreates:any = [];
+    let scoreCreates: any = [];
     this.studentScore.forEach((element: any) => {
       console.log(element);
 
@@ -124,18 +124,15 @@ export class ScoreStudentComponent implements OnInit {
         student.studentId = element.studentId;
         student.subjectId = element.subjectId;
         student.testTypeId = element.testTypeId;
-        student.point =3;
+        student.point = 3;
         scoreCreates.push(student);
       }
     });
     console.log(scoreCreates);
-    this.httpService.Post("Scores/update", scoreCreates).subscribe(data=>{
-      console.log("hhee",data);
-
-    })
+    this.httpService.Post("Scores/update", scoreCreates).subscribe((data) => {
+      console.log("hhee", data);
+    });
   }
-
-
 }
 
 export class ScoreCreate {

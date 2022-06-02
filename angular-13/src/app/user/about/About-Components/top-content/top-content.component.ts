@@ -1,17 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-top-content',
-  templateUrl: './top-content.component.html',
-  styleUrls: ['./top-content.component.css']
+  selector: "app-top-content",
+  templateUrl: "./top-content.component.html",
+  styleUrls: ["./top-content.component.css"],
 })
 export class TopContentComponent implements OnInit {
+  imagePath = "../assets/user/images/innerpage/about-us.jpg";
 
-  imagePath='../assets/user/images/innerpage/about-us.jpg';
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

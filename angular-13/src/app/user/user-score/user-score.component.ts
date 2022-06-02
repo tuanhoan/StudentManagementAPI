@@ -8,8 +8,5 @@ import { ServiceblogService } from "../blog/blog-service.service";
   styleUrls: ["./user-score.component.css"],
 })
 export class UserScoreComponent implements OnInit {
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 }
-

@@ -1,16 +1,22 @@
 <div class="row">
   <div class="col-md-3 border-right">
     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-      <div class="avatar-wrapper" (click) ="file.click()">
-        <img class="profile-pic" src="{{profile.avatar}}" />
+      <div class="avatar-wrapper" (click)="file.click()">
+        <img class="profile-pic" src="{{ profile.avatar }}" />
         <div class="upload-button">
           <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
         </div>
-        <input  (change)="onFileSelected($event)" class="file-upload" type="file" #file accept="image/*"/>
+        <input
+          (change)="onFileSelected($event)"
+          class="file-upload"
+          type="file"
+          #file
+          accept="image/*"
+        />
       </div>
 
-      <span class="font-weight-bold">{{profile.fullName}}</span
-      ><span class="text-black-50">{{profile.email}}</span>
+      <span class="font-weight-bold">{{ profile.fullName }}</span
+      ><span class="text-black-50">{{ profile.email }}</span>
       <span *ngIf="profile.isStudent" class="text-black-50">Student</span>
       <span *ngIf="!profile.isStudent" class="text-black-50">Teacher</span>
       <span> </span>

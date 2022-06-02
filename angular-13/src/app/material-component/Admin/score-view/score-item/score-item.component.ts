@@ -45,8 +45,7 @@ export class ScoreItemComponent implements OnInit {
         });
     });
   }
-  DbClick(){
-  }
+  DbClick() {}
 }
 
 export class Score {

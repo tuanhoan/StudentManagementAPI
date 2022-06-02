@@ -37,7 +37,7 @@ export class StudentListComponent implements OnInit, AfterViewInit {
   AddStudent() {
     this.router.navigate(["students"]);
   }
-  GetAll(){
+  GetAll() {
     this.students = [];
     this.httpService.Get("Students").subscribe((data: any) => {
       data.forEach((item: any) => {
@@ -52,7 +52,6 @@ export class StudentListComponent implements OnInit, AfterViewInit {
       });
       this.dataSource = new MatTableDataSource<Student>(this.students);
       this.dataSource.paginator = this.paginator;
-
     });
   }
 
@@ -94,21 +93,23 @@ export class StudentListComponent implements OnInit, AfterViewInit {
     return options && options.name ? options.name : "";
   }
   public onSelectionChange(value: any) {
-    this.students=[];
-    this.httpService.Get("Students/teams/"+value.option.value.id).subscribe((data: any) => {
-      data.forEach((item: any) => {
-        let std = new Student();
-        std.fullName = item.appUser.fullName;
-        std.email = item.appUser.email;
-        std.birthday = item.appUser.birthday;
-        std.phoneNumber = item.appUser.phoneNumber;
-        std.team = item.teamNavigation?.name;
-        std.userName = item.appUser.userName;
-        this.students.push(std);
+    this.students = [];
+    this.httpService
+      .Get("Students/teams/" + value.option.value.id)
+      .subscribe((data: any) => {
+        data.forEach((item: any) => {
+          let std = new Student();
+          std.fullName = item.appUser.fullName;
+          std.email = item.appUser.email;
+          std.birthday = item.appUser.birthday;
+          std.phoneNumber = item.appUser.phoneNumber;
+          std.team = item.teamNavigation?.name;
+          std.userName = item.appUser.userName;
+          this.students.push(std);
+        });
+        this.dataSource = new MatTableDataSource<Student>(this.students);
+        this.dataSource.paginator = this.paginator;
       });
-      this.dataSource = new MatTableDataSource<Student>(this.students);
-      this.dataSource.paginator = this.paginator;
-    });
   }
 }
 

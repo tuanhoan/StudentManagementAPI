@@ -45,12 +45,12 @@ export class StudentComponent implements OnInit {
   }
 
   public Submit() {
-    this.httpService.Post("Students", this.student).subscribe(data=>{
+    this.httpService.Post("Students", this.student).subscribe((data) => {
       console.log(data);
       let teamId = data.teamId;
       this.student = new Student();
       this.student.teamId = data.teamId;
-    })
+    });
   }
   public onSelectionChange(value: any) {
     this.student.teamId = value.option.value.id;

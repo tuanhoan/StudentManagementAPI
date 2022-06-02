@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { VisiterGraphComponent } from './visiter-graph.component';
+import { VisiterGraphComponent } from "./visiter-graph.component";
 
-describe('VisiterGraphComponent', () => {
+describe("VisiterGraphComponent", () => {
   let component: VisiterGraphComponent;
   let fixture: ComponentFixture<VisiterGraphComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VisiterGraphComponent ]
-    })
-    .compileComponents();
+      declarations: [VisiterGraphComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('VisiterGraphComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

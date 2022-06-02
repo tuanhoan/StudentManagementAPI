@@ -1,17 +1,24 @@
 <div class="px-2 py-2">
-  <button type="submit" (click)="isBulkUpload=!isBulkUpload" class="btn btn-primary">Bulk Upload</button>
+  <button
+    type="submit"
+    (click)="isBulkUpload = !isBulkUpload"
+    class="btn btn-primary"
+  >
+    Bulk Upload
+  </button>
 </div>
 
 <div *ngIf="isBulkUpload">
   <app-bulk-upload></app-bulk-upload>
 </div>
 
-<div class="row d-flex justify-content-center align-items-center h-100" *ngIf="!isBulkUpload">
+<div
+  class="row d-flex justify-content-center align-items-center h-100"
+  *ngIf="!isBulkUpload"
+>
   <div class="col-xl-9">
     <div class="card" style="border-radius: 15px">
       <div class="card-body">
-
-
         <div class="row align-items-center pt-4 pb-3">
           <div class="col-md-3 ps-5">
             <h6 class="mb-0">Họ Và Tên</h6>
@@ -19,7 +26,11 @@
           <div class="col-md-9 pe-5">
             <mat-form-field appearance="legacy">
               <mat-label>Họ Và Tên</mat-label>
-              <input [(ngModel)]="student.fullName" matInput placeholder="Nhập họ và tên" />
+              <input
+                [(ngModel)]="student.fullName"
+                matInput
+                placeholder="Nhập họ và tên"
+              />
             </mat-form-field>
           </div>
 
@@ -29,7 +40,11 @@
           <div class="col-md-9 pe-5">
             <mat-form-field appearance="legacy">
               <mat-label>Email</mat-label>
-              <input [(ngModel)]="student.email" matInput placeholder="Nhập họ và tên" />
+              <input
+                [(ngModel)]="student.email"
+                matInput
+                placeholder="Nhập họ và tên"
+              />
             </mat-form-field>
           </div>
 
@@ -39,7 +54,11 @@
           <div class="col-md-9 pe-5">
             <mat-form-field appearance="fill">
               <mat-label>Ngày sinh</mat-label>
-              <input [(ngModel)]="student.birthday" matInput [matDatepicker]="picker" />
+              <input
+                [(ngModel)]="student.birthday"
+                matInput
+                [matDatepicker]="picker"
+              />
               <mat-hint>MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle
                 matSuffix
@@ -55,7 +74,11 @@
           <div class="col-md-9 pe-5">
             <mat-form-field appearance="legacy">
               <mat-label>Số điện thoại</mat-label>
-              <input [(ngModel)]="student.phoneNumber" matInput placeholder="Nhập số điện thoại" />
+              <input
+                [(ngModel)]="student.phoneNumber"
+                matInput
+                placeholder="Nhập số điện thoại"
+              />
             </mat-form-field>
           </div>
 
@@ -70,13 +93,11 @@
                 matInput
                 [formControl]="myControl"
                 [matAutocomplete]="auto"
-
               />
               <mat-autocomplete
                 #auto="matAutocomplete"
                 [displayWith]="displayFn"
                 (optionSelected)="onSelectionChange($event)"
-
               >
                 <mat-option
                   *ngFor="let option of filteredOptions | async"
@@ -91,11 +112,12 @@
 
         <hr class="mx-n3" />
 
-
         <hr class="mx-n3" />
 
         <div class="px-5 py-4">
-          <button type="submit" (click)="Submit()" class="btn btn-primary">Submit</button>
+          <button type="submit" (click)="Submit()" class="btn btn-primary">
+            Submit
+          </button>
         </div>
       </div>
     </div>

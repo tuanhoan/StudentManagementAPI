@@ -15,7 +15,7 @@ export class ChartComponent implements OnInit {
       console.log(data);
       data.forEach((element: any) => {
         data = {
-          name:element.name,
+          name: element.name,
           data: [
             ["8-5-10", element.yeu],
             ["6.5-8.5", element.tb],

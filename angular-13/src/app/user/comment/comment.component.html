@@ -41,7 +41,12 @@
             ><img
               class="img-circle img-sm"
               alt="Profile Picture"
-              src="{{'assets\\uploads\\Avatar\\'+item.userId+'\\'+item.userNavigation.avatarPath}}"
+              src="{{
+                'assets\\uploads\\Avatar\\' +
+                  item.userId +
+                  '\\' +
+                  item.userNavigation.avatarPath
+              }}"
           /></a>
           <div class="media-body">
             <div class="mar-btm">

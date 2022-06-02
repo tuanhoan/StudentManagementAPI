@@ -1,16 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { BannerContentComponent } from './banner-content.component';
+import { BannerContentComponent } from "./banner-content.component";
 
-describe('BannerContentComponent', () => {
+describe("BannerContentComponent", () => {
   let component: BannerContentComponent;
   let fixture: ComponentFixture<BannerContentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BannerContentComponent ]
-    })
-    .compileComponents();
+      declarations: [BannerContentComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('BannerContentComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

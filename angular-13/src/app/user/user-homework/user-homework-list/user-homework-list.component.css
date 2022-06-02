@@ -1,7 +1,8 @@
 table {
   width: 100%;
 }
-tr.mat-row, tr.mat-footer-row {
+tr.mat-row,
+tr.mat-footer-row {
   height: 46px;
 }
 .banner-innerpage {
