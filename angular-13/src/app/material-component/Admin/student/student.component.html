@@ -4,7 +4,7 @@
     (click)="isBulkUpload = !isBulkUpload"
     class="btn btn-primary"
   >
-    Bulk Upload
+    {{!isBulkUpload?"Thêm bằng file excel":"Thêm một học sinh"}}
   </button>
 </div>
 
@@ -116,7 +116,7 @@
 
         <div class="px-5 py-4">
           <button type="submit" (click)="Submit()" class="btn btn-primary">
-            Submit
+            Xác nhận
           </button>
         </div>
       </div>

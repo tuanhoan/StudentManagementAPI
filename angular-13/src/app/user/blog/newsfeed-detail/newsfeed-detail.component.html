@@ -7,10 +7,10 @@
     <div class="row justify-content-center">
       <!-- Column -->
       <div class="col-lg-9 col-md-6 align-self-center text-center">
-        <h1 class="title">DETAIL PAGE</h1>
-        <h5 class="subtitle op-5">
+        <h1 class="title">Chi tiết thông báo</h1>
+        <!-- <h5 class="subtitle op-5">
           We are Small Team of Creative People working together
-        </h5>
+        </h5> -->
       </div>
       <!-- Column -->
     </div>
@@ -22,13 +22,15 @@
   <div class="row justify-content-center">
     <div class="col-md-8 no-trans">
       <div class="mini-spacer">
-        <img src="{{ blogDetail?.image }}" alt="wrapkit" class="img-fluid" />
+        <!-- <img src="{{ blogDetail?.image }}" alt="wrapkit" class="img-fluid" /> -->
         <div
           class="d-flex align-items-center text-uppercase m-t-40 font-13 font-medium"
         >
-          <a routerLink="" class="link">John Deo</a>
+          <!-- <a routerLink="" class="link">John Deo</a> -->
           <div class="ml-auto">
-            <a routerLink="" class="link">{{ blogDetail?.createAt }} </a>
+            <a routerLink="" class="link"
+              >{{ blogDetail?.createAt | date: "medium" }}
+            </a>
           </div>
         </div>
         <h2 class="title font-light">
@@ -45,14 +47,14 @@
           [Id]="blogDetail?.id"
         ></app-comment>
 
-        <div class="m-t-30">
+        <!-- <div class="m-t-30">
           <button type="button" class="btn bg-facebook btn-rounded mr-3">
             <i class="fa fa-facebook"></i> Facebook
           </button>
           <button type="button" class="btn bg-twitter btn-rounded">
             <i class="fa fa-twitter"></i> Twitter
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
